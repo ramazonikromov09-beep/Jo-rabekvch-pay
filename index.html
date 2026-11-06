@@ -1,0 +1,314 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOP UP SERVICE</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #080811;
+    color: white;
+}
+
+header {
+    padding: 22px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #101020;
+    border-bottom: 1px solid #28284c;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+    color: #a855f7;
+}
+
+.logo span {
+    color: #00d9ff;
+}
+
+select {
+    background: #19192c;
+    color: white;
+    padding: 9px;
+    border: 1px solid #5555aa;
+    border-radius: 8px;
+}
+
+.hero {
+    text-align: center;
+    padding: 65px 20px;
+    background: linear-gradient(135deg, #17102f, #071c31);
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.hero h1 span {
+    color: #00d9ff;
+}
+
+.hero p {
+    color: #b8b8d0;
+    margin-bottom: 25px;
+}
+
+.hero a {
+    display: inline-block;
+    background: #8b35ed;
+    color: white;
+    text-decoration: none;
+    padding: 13px 25px;
+    border-radius: 9px;
+}
+
+section {
+    padding: 35px 7%;
+}
+
+.section-title {
+    font-size: 25px;
+    margin-bottom: 25px;
+}
+
+.games {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+    gap: 18px;
+}
+
+.game {
+    background: #151528;
+    border: 1px solid #303052;
+    border-radius: 13px;
+    padding: 23px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.game:hover, .game.active {
+    border-color: #00d9ff;
+    transform: translateY(-4px);
+    box-shadow: 0 0 15px #00d9ff33;
+}
+
+.game .emoji {
+    font-size: 38px;
+    margin-bottom: 12px;
+}
+
+.game h3 {
+    font-size: 15px;
+}
+
+.order {
+    max-width: 500px;
+    margin: auto;
+    background: #151528;
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid #35355c;
+}
+
+.order input, .order select {
+    width: 100%;
+    padding: 13px;
+    margin: 10px 0;
+    background: #090916;
+    border: 1px solid #44446b;
+    border-radius: 8px;
+    color: white;
+}
+
+.order button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 12px;
+    background: linear-gradient(90deg, #8738ed, #087eea);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.note {
+    color: #aaaac0;
+    font-size: 12px;
+    margin-top: 12px;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #8888a5;
+    background: #101020;
+    margin-top: 30px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">TOP UP <span>SERVICE</span></div>
+
+    <select id="language" onchange="changeLanguage()">
+        <option value="uz">UZ</option>
+        <option value="ru">RU</option>
+        <option value="en">EN</option>
+    </select>
+</header>
+
+<div class="hero">
+    <h1 id="heroTitle">O‘YINLARINGIZ UCHUN <span>TOP UP!</span></h1>
+    <p id="heroText">Sevimli o‘yinlaringiz uchun qulay top-up platformasi.</p>
+    <a href="#games" id="heroButton">O‘yinlarni tanlash</a>
+</div>
+
+<section id="games">
+    <h2 class="section-title" id="gamesTitle">🎮 O‘yinlar katalogi</h2>
+
+    <div class="games">
+        <div class="game" onclick="chooseGame('Free Fire', this)">
+            <div class="emoji">🔥</div>
+            <h3>Free Fire</h3>
+        </div>
+
+        <div class="game" onclick="chooseGame('PUBG Mobile', this)">
+            <div class="emoji">🎯</div>
+            <h3>PUBG Mobile</h3>
+        </div>
+
+        <div class="game" onclick="chooseGame('Call of Duty Mobile', this)">
+            <div class="emoji">⚔️</div>
+            <h3>Call of Duty</h3>
+        </div>
+
+        <div class="game" onclick="chooseGame('Mobile Legends', this)">
+            <div class="emoji">🛡️</div>
+            <h3>Mobile Legends</h3>
+        </div>
+
+        <div class="game" onclick="chooseGame('Genshin Impact', this)">
+            <div class="emoji">🌌</div>
+            <h3>Genshin Impact</h3>
+        </div>
+
+        <div class="game" onclick="chooseGame('Valorant', this)">
+            <div class="emoji">💥</div>
+            <h3>Valorant</h3>
+        </div>
+    </div>
+</section>
+
+<section id="order">
+    <h2 class="section-title" id="orderTitle">📦 Buyurtma berish</h2>
+
+    <div class="order">
+        <input id="gameName" placeholder="Tanlangan o‘yin" readonly>
+
+        <input id="playerId" placeholder="Player ID / UID">
+
+        <select id="product">
+            <option value="">Mahsulotni tanlang</option>
+            <option>100 Diamonds</option>
+            <option>310 Diamonds</option>
+            <option>520 Diamonds</option>
+            <option>1000 UC</option>
+            <option>Boshqa miqdor</option>
+        </select>
+
+        <input id="contact" placeholder="Telegram username yoki telefon">
+
+        <button onclick="sendOrder()" id="orderButton">
+            Buyurtma yuborish
+        </button>
+
+        <p class="note">
+            Demo versiya: buyurtma hozircha faqat sinov uchun.
+            Hech qachon o‘yin parolingizni kiritmang.
+        </p>
+    </div>
+</section>
+
+<footer>
+    © 2026 TOP UP SERVICE | All rights reserved.
+</footer>
+
+<script>
+let selectedGame = "";
+
+function chooseGame(name, element) {
+    selectedGame = name;
+    document.getElementById("gameName").value = name;
+
+    document.querySelectorAll(".game").forEach(game => {
+        game.classList.remove("active");
+    });
+
+    element.classList.add("active");
+
+    document.getElementById("order").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+function sendOrder() {
+    const id = document.getElementById("playerId").value.trim();
+    const product = document.getElementById("product").value;
+    const contact = document.getElementById("contact").value.trim();
+
+    if (!selectedGame || !id || !product || !contact) {
+        alert("Iltimos, barcha maydonlarni to‘ldiring!");
+        return;
+    }
+
+    alert(
+        "Demo buyurtma tayyor!\n" +
+        "O‘yin: " + selectedGame +
+        "\nPlayer ID: " + id +
+        "\nMahsulot: " + product +
+        "\nAloqa: " + contact +
+        "\n\nHozircha haqiqiy buyurtma yuborilmadi."
+    );
+}
+
+function changeLanguage() {
+    const lang = document.getElementById("language").value;
+
+    const translations = {
+        uz: ["O‘YINLARINGIZ UCHUN", "Sevimli o‘yinlaringiz uchun qulay top-up platformasi.", "O‘yinlarni tanlash", "🎮 O‘yinlar katalogi", "📦 Buyurtma berish", "Buyurtma yuborish"],
+        ru: ["ПОПОЛНЕНИЕ ДЛЯ ВАШИХ ИГР", "Удобная платформа для пополнения любимых игр.", "Выбрать игру", "🎮 Каталог игр", "📦 Оформить заказ", "Отправить заказ"],
+        en: ["TOP UP FOR YOUR GAMES", "A convenient platform for your favorite games.", "Choose a game", "🎮 Game catalog", "📦 Place an order", "Submit order"]
+    };
+
+    const t = translations[lang];
+
+    document.getElementById("heroTitle").innerHTML =
+        t[0] + ' <span>TOP UP!</span>';
+    document.getElementById("heroText").textContent = t[1];
+    document.getElementById("heroButton").textContent = t[2];
+    document.getElementById("gamesTitle").textContent = t[3];
+    document.getElementById("orderTitle").textContent = t[4];
+    document.getElementById("orderButton").textContent = t[5];
+}
+</script>
+
+</body>
+</html>
