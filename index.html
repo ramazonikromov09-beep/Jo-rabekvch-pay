@@ -4,312 +4,682 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#090a12">
+<meta name="theme-color" content="#090912">
 <title>TOP UP SERVICE</title>
+
 <style>
-:root {
-  --bg:#090a12;
-  --panel:#151729;
-  --line:#292d45;
+:root{
+  --bg:#090912;
+  --panel:#131426;
+  --panel2:#191b31;
+  --line:#292b46;
   --purple:#925cff;
-  --blue:#37c9ff;
-  --muted:#9ca3bd;
+  --blue:#36caff;
+  --text:#fff;
+  --muted:#999db8;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{
   font-family:Arial,sans-serif;
   background:var(--bg);
-  color:white;
+  color:var(--text);
+  min-height:100vh;
+  padding-bottom:85px;
 }
-button,a{font:inherit}
-button{cursor:pointer}
+button{font:inherit;cursor:pointer}
+button:focus-visible{outline:2px solid var(--blue)}
 header{
-  background:#101321;
+  height:72px;
+  padding:0 6%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:#10111f;
   border-bottom:1px solid var(--line);
-  padding:18px 5%;
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(15px);
+}
+.logo{
+  font-size:21px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+.logo span{color:var(--blue)}
+.header-right{
+  color:var(--muted);
+  font-size:12px;
+}
+.container{
+  width:92%;
+  max-width:1100px;
+  margin:auto;
+}
+.page{display:none;padding:30px 0}
+.page.active{display:block;animation:fade .3s ease}
+@keyframes fade{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:55px 35px;
+  border:1px solid #39305f;
+  border-radius:25px;
+  background:
+    radial-gradient(circle at 90% 10%,#6536aa70,transparent 35%),
+    linear-gradient(120deg,#21143e,#101d36 65%,#102d43);
+  margin-bottom:35px;
+}
+.hero:after{
+  content:"";
+  position:absolute;
+  width:240px;
+  height:240px;
+  border-radius:50%;
+  background:#925cff25;
+  filter:blur(65px);
+  right:-60px;
+  bottom:-100px;
+}
+.hero-content{position:relative;z-index:1;max-width:600px}
+.tag{
+  display:inline-block;
+  background:#ffffff12;
+  border:1px solid #ffffff20;
+  padding:7px 12px;
+  border-radius:30px;
+  font-size:11px;
+  color:#d4c3ff;
+  margin-bottom:18px;
+}
+.hero h1{
+  font-size:clamp(34px,6vw,58px);
+  line-height:1.1;
+  margin-bottom:15px;
+}
+.hero h1 span{
+  background:linear-gradient(90deg,#a77bff,#38d5ff);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+.hero p{
+  color:#c1c4d8;
+  line-height:1.7;
+  max-width:470px;
+}
+.primary-btn{
+  border:0;
+  color:white;
+  background:linear-gradient(100deg,var(--purple),#347fe9);
+  padding:14px 22px;
+  border-radius:12px;
+  font-weight:bold;
+  margin-top:22px;
+  box-shadow:0 7px 25px #7044db45;
+  transition:.2s;
+}
+.primary-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 30px #7044db70;
+}
+.section-head{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  position:sticky;
-  top:0;
-  z-index:10;
+  margin:30px 0 18px;
 }
-.logo{font-size:21px;font-weight:900}
-.logo span{color:var(--blue)}
-nav{display:flex;gap:20px}
-nav button{
-  background:none;border:0;color:#bbb;
+.section-head h2{font-size:22px}
+.section-head button{
+  background:none;
+  border:0;
+  color:var(--blue);
+  font-size:13px;
 }
-nav button:hover{color:var(--blue)}
-.container{width:90%;max-width:1100px;margin:auto}
-.page{display:none;padding:40px 0}
-.page.active{display:block}
-.hero{
-  padding:65px 30px;
-  border-radius:22px;
-  background:linear-gradient(120deg,#21133d,#102b45);
-  margin-bottom:40px;
-}
-.hero h1{font-size:clamp(32px,5vw,55px);margin-bottom:15px}
-.hero h1 span{color:var(--blue)}
-.hero p{color:#c2c6d8;line-height:1.7}
-.btn{
-  background:linear-gradient(100deg,#925cff,#287eea);
-  color:white;border:0;border-radius:10px;
-  padding:13px 20px;font-weight:bold;
-  margin-top:20px;
-}
-.btn:disabled{opacity:.6;cursor:wait}
-.title{font-size:27px;margin-bottom:22px}
 .games{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:16px;
+  gap:17px;
 }
 .game{
+  background:linear-gradient(145deg,#191a30,#111321);
+  border:1px solid var(--line);
+  border-radius:19px;
+  padding:20px;
+  cursor:pointer;
+  transition:.25s;
+  position:relative;
+  overflow:hidden;
+}
+.game:hover{
+  transform:translateY(-5px);
+  border-color:#7555bd;
+  box-shadow:0 12px 30px #0006,0 0 20px #925cff18;
+}
+.game-image{
+  width:75px;
+  height:75px;
+  border-radius:18px;
+  overflow:hidden;
+  background:#252740;
+  margin-bottom:16px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:36px;
+}
+.game-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.game h3{font-size:16px}
+.game p{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:7px;
+}
+.game-arrow{
+  position:absolute;
+  right:17px;
+  bottom:20px;
+  color:var(--blue);
+  font-size:20px;
+}
+.features{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  margin-top:35px;
+}
+.feature{
   background:var(--panel);
   border:1px solid var(--line);
   border-radius:17px;
-  padding:22px 15px;
-  text-align:center;
-  cursor:pointer;
-  transition:.2s;
+  padding:22px;
 }
-.game:hover{
-  border-color:var(--blue);
-  transform:translateY(-4px);
-  box-shadow:0 8px 25px #37c9ff20;
+.feature-icon{font-size:25px;margin-bottom:12px}
+.feature h3{font-size:15px}
+.feature p{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.6;
+  margin-top:9px;
 }
-.game .icon{font-size:42px;margin-bottom:13px}
-.game h3{font-size:15px}
-.game p{color:var(--muted);font-size:12px;margin-top:8px}
+.title{
+  font-size:25px;
+  margin-bottom:20px;
+}
 .panel{
-  max-width:550px;
-  margin:auto;
-  background:var(--panel);
-  padding:25px;
+  background:linear-gradient(145deg,#191a30,#111321);
   border:1px solid var(--line);
-  border-radius:18px;
+  border-radius:20px;
+  padding:25px;
+  max-width:650px;
+  margin:auto;
 }
-.panel h2{margin-bottom:15px}
-input,select{
-  width:100%;
-  padding:14px;
-  margin:10px 0;
-  border-radius:9px;
-  border:1px solid #414565;
-  background:#0b0d18;
+.back-btn{
+  border:1px solid var(--line);
+  background:#202139;
   color:white;
+  padding:10px 15px;
+  border-radius:9px;
+  margin-bottom:20px;
+}
+.game-heading{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  margin-bottom:22px;
+}
+.game-heading .game-image{margin:0}
+.game-heading p{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:6px;
+}
+.label{
+  font-size:13px;
+  color:#d5d6e4;
+  margin:20px 0 10px;
+  display:block;
 }
 .packages{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:10px;
-  margin:15px 0;
+  gap:12px;
 }
 .package{
-  background:#0b0d18;
-  color:white;
   border:1px solid var(--line);
-  padding:15px;
-  border-radius:10px;
+  background:#0d0f1c;
+  color:white;
+  border-radius:13px;
+  padding:15px 12px;
+  text-align:left;
+  transition:.2s;
+  display:flex;
+  align-items:center;
+  gap:11px;
 }
+.package:hover{border-color:#7354b6}
 .package.selected{
   border-color:var(--blue);
-  background:#14253a;
+  background:#14243a;
+  box-shadow:0 0 16px #36caff20;
 }
+.currency-icon{
+  width:36px;
+  height:36px;
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+}
+.diamond{
+  width:34px;
+  height:34px;
+}
+.package strong{font-size:14px}
 .package small{
   display:block;
   color:var(--muted);
-  margin-top:6px;
+  font-size:10px;
+  margin-top:5px;
 }
-.note{font-size:12px;color:var(--muted);line-height:1.6;margin-top:15px}
-.feature-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-  margin-top:30px;
+input{
+  width:100%;
+  background:#0c0e1b;
+  border:1px solid #393d5a;
+  border-radius:11px;
+  padding:15px;
+  color:white;
+  outline:none;
+  margin-top:8px;
 }
-.feature{
-  background:var(--panel);
-  padding:22px;
-  border-radius:15px;
-  border:1px solid var(--line);
-}
-.feature p{color:var(--muted);font-size:13px;margin-top:9px;line-height:1.6}
-footer{
-  border-top:1px solid var(--line);
-  padding:25px;
-  text-align:center;
+input:focus{border-color:var(--blue)}
+.full-btn{width:100%}
+.note{
+  font-size:12px;
   color:var(--muted);
-  margin-top:40px;
+  line-height:1.7;
+  margin-top:15px;
 }
 .message{
-  margin-top:15px;
-  padding:12px;
-  border-radius:9px;
   display:none;
-  background:#16432f;
-  color:#9bf0c5;
+  background:#153b30;
+  color:#a5f2cf;
+  border:1px solid #276b51;
+  border-radius:11px;
+  padding:13px;
+  margin-top:15px;
+  font-size:13px;
+}
+.help-card{
+  background:var(--panel);
+  padding:22px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  margin-bottom:13px;
+}
+.help-card p{
+  color:var(--muted);
+  line-height:1.7;
+  font-size:13px;
+  margin-top:9px;
+}
+.profile-icon{
+  width:70px;
+  height:70px;
+  border-radius:22px;
+  background:linear-gradient(135deg,#925cff,#277fe7);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+  margin-bottom:18px;
+}
+.status{
+  display:inline-block;
+  font-size:11px;
+  color:#8df0c0;
+  background:#153b30;
+  padding:7px 12px;
+  border-radius:20px;
+  margin-top:15px;
+}
+footer{
+  text-align:center;
+  border-top:1px solid var(--line);
+  padding:25px;
+  color:var(--muted);
+  font-size:12px;
+  margin-top:35px;
+}
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#111321f5;
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:space-around;
+  padding:11px 5px calc(11px + env(safe-area-inset-bottom));
+  z-index:30;
+  backdrop-filter:blur(15px);
+}
+.nav-item{
+  background:none;
+  border:0;
+  color:#8589a5;
+  font-size:10px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:5px;
+  min-width:55px;
+}
+.nav-item .nav-icon{font-size:20px}
+.nav-item.active{color:var(--blue)}
+@media(min-width:701px){
+  body{padding-bottom:0}
+  .bottom-nav{display:none}
+  .desktop-nav{display:flex;gap:22px}
+  .desktop-nav button{
+    background:none;
+    border:0;
+    color:#aeb0c5;
+    font-size:13px;
+  }
+  .desktop-nav button:hover{color:var(--blue)}
 }
 @media(max-width:700px){
-  header{flex-wrap:wrap;gap:15px}
-  nav{width:100%;justify-content:space-between;gap:5px}
-  nav button{font-size:12px}
-  .games{grid-template-columns:repeat(2,1fr);gap:10px}
-  .game{padding:18px 8px}
-  .feature-grid{grid-template-columns:1fr}
-  .hero{padding:40px 20px}
+  header{height:65px;padding:0 5%}
+  .desktop-nav{display:none}
+  .container{width:92%}
+  .page{padding:22px 0}
+  .hero{padding:37px 22px}
+  .games{grid-template-columns:repeat(2,1fr);gap:11px}
+  .game{padding:15px 12px}
+  .game-image{width:60px;height:60px}
+  .game h3{font-size:13px}
+  .game p{font-size:11px}
+  .features{grid-template-columns:1fr}
+  .packages{gap:9px}
+  .package{padding:12px 8px;gap:7px}
+  .package strong{font-size:12px}
+  .currency-icon{width:29px;height:29px}
+  .diamond{width:29px;height:29px}
+  .panel{padding:18px}
 }
-@media(max-width:370px){
+@media(max-width:350px){
   .games{grid-template-columns:1fr}
 }
 </style>
 </head>
+
 <body>
 
 <header>
   <div class="logo">TOP UP <span>SERVICE</span></div>
-  <nav>
+
+  <nav class="desktop-nav">
     <button onclick="showPage('home')">Bosh sahifa</button>
     <button onclick="showPage('games')">O‘yinlar</button>
     <button onclick="showPage('help')">Yordam</button>
     <button onclick="showPage('profile')">Profil</button>
   </nav>
+
+  <div class="header-right">● ONLINE</div>
 </header>
 
 <main class="container">
 
 <section id="home" class="page active">
   <div class="hero">
-    <h1>O‘yining uchun <span>TOP UP!</span></h1>
-    <p>Sevimli o‘yinlaring uchun zamonaviy top-up platformasi.</p>
-    <button class="btn" onclick="showPage('games')">
-      O‘yinlarni ko‘rish →
-    </button>
+    <div class="hero-content">
+      <div class="tag">⚡ GAMING TOP UP PLATFORM</div>
+      <h1>O‘yining uchun <span>TOP UP!</span></h1>
+      <p>
+        Sevimli o‘yinlaring uchun qulay va zamonaviy
+        top-up platformasi. O‘yinni tanla va demo buyurtmangni yubor.
+      </p>
+      <button class="primary-btn" onclick="showPage('games')">
+        O‘yinlarni ko‘rish →
+      </button>
+    </div>
   </div>
 
-  <h2 class="title">🔥 Mashhur o‘yinlar</h2>
+  <div class="section-head">
+    <h2>🔥 Mashhur o‘yinlar</h2>
+    <button onclick="showPage('games')">Barchasi →</button>
+  </div>
+
   <div class="games" id="homeGames"></div>
 
-  <div class="feature-grid">
+  <div class="section-head">
+    <h2>✨ Afzalliklar</h2>
+  </div>
+
+  <div class="features">
     <div class="feature">
-      <h3>⚡ Tezkor</h3>
-      <p>Qulay va sodda buyurtma jarayoni.</p>
+      <div class="feature-icon">⚡</div>
+      <h3>Qulay jarayon</h3>
+      <p>O‘yinni va paketni tanlab, UID orqali demo buyurtma yuborish.</p>
     </div>
     <div class="feature">
-      <h3>🛡️ Xavfsiz</h3>
+      <div class="feature-icon">🛡️</div>
+      <h3>Xavfsizlik</h3>
       <p>O‘yin parolingizni hech qachon so‘ramaymiz.</p>
     </div>
     <div class="feature">
-      <h3>📦 Buyurtmalar</h3>
-      <p>Demo buyurtmalar bazada saqlanadi.</p>
+      <div class="feature-icon">💎</div>
+      <h3>Gaming platforma</h3>
+      <p>O‘yinlar va paketlar bir joyda.</p>
     </div>
   </div>
 </section>
 
 <section id="games" class="page">
   <h2 class="title">🎮 O‘yinlar katalogi</h2>
+  <p class="note" style="margin:0 0 20px">
+    O‘zing yoqtirgan o‘yinni tanla.
+  </p>
   <div class="games" id="allGames"></div>
 </section>
 
 <section id="detail" class="page">
   <div class="panel">
-    <button class="btn" style="margin:0 0 20px" onclick="showPage('games')">
-      ← Orqaga
-    </button>
-    <h2 id="gameTitle">O‘yin</h2>
-    <p class="note">Demo paketni tanlang:</p>
+    <button class="back-btn" onclick="showPage('games')">← Orqaga</button>
 
+    <div class="game-heading">
+      <div class="game-image" id="detailImage">🎮</div>
+      <div>
+        <h2 id="gameTitle">O‘yin</h2>
+        <p id="gameCurrency">Paket tanlang</p>
+      </div>
+    </div>
+
+    <label class="label">💎 Paketni tanlang</label>
     <div class="packages" id="packages"></div>
 
-    <input id="playerId" placeholder="Player ID / UID">
+    <label class="label" for="playerId">👤 Player ID / UID</label>
+    <input id="playerId" type="text" placeholder="Player ID raqamingizni kiriting" maxlength="80">
 
-    <button class="btn" style="width:100%" id="orderButton" onclick="sendOrder()">
-      Demo buyurtma yuborish
+    <button class="primary-btn full-btn" id="orderButton" onclick="sendOrder()">
+      Demo buyurtma yuborish →
     </button>
 
     <div class="message" id="message"></div>
 
     <p class="note">
-      Demo versiya. Haqiqiy to‘lov va o‘yinga valyuta yetkazib berish hozircha mavjud emas.
-      O‘yin parolingizni kiritmang.
+      ⚠️ Bu demo versiya. Haqiqiy to‘lov va o‘yinga valyuta
+      yetkazib berish hozircha mavjud emas. O‘yin parolingizni kiritmang.
     </p>
   </div>
 </section>
 
 <section id="help" class="page">
   <h2 class="title">❓ Yordam markazi</h2>
-  <div class="panel">
+
+  <div class="help-card">
     <h3>Sayt qanday ishlaydi?</h3>
-    <p class="note">
+    <p>
       1. O‘yinni tanlang.<br>
-      2. Paketni tanlang.<br>
+      2. Kerakli paketni belgilang.<br>
       3. Player ID kiriting.<br>
       4. Demo buyurtma yuboring.
     </p>
-    <p class="note">
-      Hozircha sayt faqat sinov rejimida ishlaydi.
+  </div>
+
+  <div class="help-card">
+    <h3>🔐 Xavfsizlik</h3>
+    <p>
+      Sayt hech qachon o‘yin akkauntingiz parolini so‘ramaydi.
+      Faqat Player ID kerak bo‘ladi.
+    </p>
+  </div>
+
+  <div class="help-card">
+    <h3>📦 Buyurtmalar</h3>
+    <p>
+      Demo buyurtmalar sinov maqsadida ma’lumotlar bazasiga yoziladi.
+      Bu haqiqiy top-up xizmati emas.
     </p>
   </div>
 </section>
 
 <section id="profile" class="page">
   <div class="panel">
-    <h2>👤 Shaxsiy kabinet</h2>
+    <div class="profile-icon">👤</div>
+    <h2>Shaxsiy kabinet</h2>
     <p class="note">
+      Xush kelibsiz! Bu bo‘lim hozircha demo rejimida.
       Profil va buyurtmalar tarixi keyingi bosqichda qo‘shiladi.
     </p>
+    <div class="status">● DEMO ACCOUNT</div>
   </div>
 </section>
 
 </main>
 
 <footer>
-  © 2026 TOP UP SERVICE | Demo loyiha
+  © 2026 TOP UP SERVICE<br>
+  <span style="display:block;margin-top:7px">
+    Gaming platforma | Demo loyiha
+  </span>
 </footer>
+
+<nav class="bottom-nav">
+  <button class="nav-item active" data-page="home" onclick="showPage('home')">
+    <span class="nav-icon">⌂</span>
+    Bosh sahifa
+  </button>
+  <button class="nav-item" data-page="games" onclick="showPage('games')">
+    <span class="nav-icon">🎮</span>
+    O‘yinlar
+  </button>
+  <button class="nav-item" data-page="help" onclick="showPage('help')">
+    <span class="nav-icon">❔</span>
+    Yordam
+  </button>
+  <button class="nav-item" data-page="profile" onclick="showPage('profile')">
+    <span class="nav-icon">👤</span>
+    Profil
+  </button>
+</nav>
 
 <script>
 const SUPABASE_URL =
 "https://xdfwhzhhrnapqldfrbsr.supabase.co";
 
-// Bu yerga avvalgi ishlayotgan publishable keyni qo‘ying.
-const SUPABASE_KEY = "sb_publishable_dibm89IcPFuf1o1nEy2faQ_jnqAyXga";
+const SUPABASE_KEY =
+"sb_publishable_dibm89IcPFuf1o1nEy2faQ_jnqAyXga";
 
 const games = [
-  {name:"Free Fire",icon:"🔥",type:"Diamonds"},
-  {name:"PUBG Mobile",icon:"🎯",type:"UC"},
-  {name:"Call of Duty Mobile",icon:"⚔️",type:"CP"},
-  {name:"Mobile Legends",icon:"🛡️",type:"Diamonds"},
-  {name:"Genshin Impact",icon:"🌌",type:"Crystals"},
-  {name:"Valorant",icon:"💥",type:"VP"}
+  {
+    name:"Free Fire",
+    currency:"Diamonds",
+    image:"https://www.google.com/s2/favicons?domain=ff.garena.com&sz=128",
+    icon:"🔥",
+    packages:["100 Diamonds","310 Diamonds","520 Diamonds","1060 Diamonds","2180 Diamonds","5600 Diamonds"]
+  },
+  {
+    name:"PUBG Mobile",
+    currency:"UC",
+    image:"https://www.google.com/s2/favicons?domain=pubgmobile.com&sz=128",
+    icon:"🎯",
+    packages:["60 UC","325 UC","660 UC","1800 UC","3850 UC","8100 UC"]
+  },
+  {
+    name:"Call of Duty Mobile",
+    currency:"CP",
+    image:"https://www.google.com/s2/favicons?domain=callofduty.com&sz=128",
+    icon:"⚔️",
+    packages:["80 CP","420 CP","880 CP","2400 CP","5000 CP"]
+  },
+  {
+    name:"Mobile Legends",
+    currency:"Diamonds",
+    image:"https://www.google.com/s2/favicons?domain=mobilelegends.com&sz=128",
+    icon:"🛡️",
+    packages:["86 Diamonds","172 Diamonds","257 Diamonds","706 Diamonds","1412 Diamonds"]
+  },
+  {
+    name:"Genshin Impact",
+    currency:"Crystals",
+    image:"https://www.google.com/s2/favicons?domain=genshin.hoyoverse.com&sz=128",
+    icon:"🌌",
+    packages:["60 Crystals","300 Crystals","980 Crystals","1980 Crystals","3280 Crystals"]
+  },
+  {
+    name:"Valorant",
+    currency:"VP",
+    image:"https://www.google.com/s2/favicons?domain=playvalorant.com&sz=128",
+    icon:"💥",
+    packages:["475 VP","1000 VP","2050 VP","3650 VP","5350 VP"]
+  }
 ];
 
-const packages = [
-  "100 Diamonds",
-  "310 Diamonds",
-  "520 Diamonds",
-  "1000 UC",
-  "Boshqa miqdor"
-];
-
-let selectedGame = "";
+let selectedGame = null;
 let selectedPackage = "";
 
 function showPage(id){
   document.querySelectorAll(".page").forEach(page=>{
     page.classList.remove("active");
   });
-  document.getElementById(id).classList.add("active");
+
+  const target = document.getElementById(id);
+  if(target) target.classList.add("active");
+
+  document.querySelectorAll(".nav-item").forEach(button=>{
+    button.classList.toggle("active",button.dataset.page===id);
+  });
+
   window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function gameImage(game){
+  return `
+    <img
+      src="${game.image}"
+      alt="${game.name}"
+      loading="lazy"
+      onerror="this.style.display='none';this.parentElement.textContent='${game.icon}'"
+    >
+  `;
 }
 
 function createGameCard(game){
   return `
     <div class="game" onclick="chooseGame('${game.name}')">
-      <div class="icon">${game.icon}</div>
+      <div class="game-image">${gameImage(game)}</div>
       <h3>${game.name}</h3>
-      <p>${game.type}</p>
+      <p>${game.currency}</p>
+      <span class="game-arrow">↗</span>
     </div>
   `;
 }
@@ -322,19 +692,56 @@ function renderGames(){
     games.map(createGameCard).join("");
 }
 
+function diamondIcon(){
+  return `
+    <svg class="diamond" viewBox="0 0 100 100" aria-label="Olmos">
+      <defs>
+        <linearGradient id="diamondGradient" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#a8f4ff"/>
+          <stop offset="50%" stop-color="#37c9ff"/>
+          <stop offset="100%" stop-color="#2868e8"/>
+        </linearGradient>
+      </defs>
+      <path d="M20 18 L80 18 L96 42 L50 92 L4 42 Z"
+        fill="url(#diamondGradient)" stroke="#b9f5ff" stroke-width="3"/>
+      <path d="M20 18 L35 42 L50 92 L4 42 Z" fill="#ffffff40"/>
+      <path d="M80 18 L65 42 L50 92 L96 42 Z" fill="#123dbb40"/>
+      <path d="M4 42 H96 M20 18 L35 42 L50 18 L65 42 L80 18"
+        fill="none" stroke="#d7faff" stroke-width="2"/>
+    </svg>
+  `;
+}
+
+function currencyIcon(game){
+  if(game.name==="Free Fire" || game.name==="Mobile Legends"){
+    return diamondIcon();
+  }
+  if(game.name==="PUBG Mobile") return "🪙";
+  if(game.name==="Call of Duty Mobile") return "🎖️";
+  if(game.name==="Genshin Impact") return "💠";
+  return "🔹";
+}
+
 function chooseGame(name){
-  selectedGame = name;
+  selectedGame = games.find(game=>game.name===name);
   selectedPackage = "";
 
-  document.getElementById("gameTitle").textContent = name;
+  if(!selectedGame) return;
+
+  document.getElementById("gameTitle").textContent = selectedGame.name;
+  document.getElementById("gameCurrency").textContent = selectedGame.currency;
+  document.getElementById("detailImage").innerHTML = gameImage(selectedGame);
   document.getElementById("playerId").value = "";
   document.getElementById("message").style.display = "none";
 
   document.getElementById("packages").innerHTML =
-    packages.map((item,index)=>`
+    selectedGame.packages.map((item,index)=>`
       <button class="package" onclick="choosePackage(${index},this)">
-        ${item}
-        <small>Demo paket</small>
+        <span class="currency-icon">${currencyIcon(selectedGame)}</span>
+        <span>
+          <strong>${item}</strong>
+          <small>Demo paket</small>
+        </span>
       </button>
     `).join("");
 
@@ -342,7 +749,7 @@ function chooseGame(name){
 }
 
 function choosePackage(index,element){
-  selectedPackage = packages[index];
+  selectedPackage = selectedGame.packages[index];
 
   document.querySelectorAll(".package").forEach(item=>{
     item.classList.remove("selected");
@@ -361,6 +768,8 @@ async function sendOrder(){
     return;
   }
 
+  if(button.disabled) return;
+
   button.disabled = true;
   button.textContent = "Yuborilmoqda...";
 
@@ -376,7 +785,7 @@ async function sendOrder(){
           "Prefer":"return=minimal"
         },
         body:JSON.stringify({
-          game_name:selectedGame,
+          game_name:selectedGame.name,
           package_name:selectedPackage,
           player_id:id
         })
@@ -394,10 +803,11 @@ async function sendOrder(){
     document.getElementById("playerId").value = "";
 
   }catch(error){
-    alert("Xatolik: " + error.message);
+    console.error(error);
+    alert("Buyurtma yuborilmadi. Xatolik: " + error.message);
   }finally{
     button.disabled = false;
-    button.textContent = "Demo buyurtma yuborish";
+    button.textContent = "Demo buyurtma yuborish →";
   }
 }
 
