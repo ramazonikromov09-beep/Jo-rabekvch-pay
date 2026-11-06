@@ -1,613 +1,385 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080812">
-<title>NEXUS TOP UP | Global Gaming Marketplace</title>
-
+<meta name="theme-color" content="#080912">
+<title>NEXUS TOP UP | Gaming Marketplace</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{
-  --bg:#080812;
-  --panel:#111124;
-  --panel2:#19192f;
-  --border:#292943;
-  --text:#f5f4ff;
-  --muted:#a5a4bd;
-  --blue:#7665ff;
-  --cyan:#42d9ff;
-  --pink:#db65ff;
+  --bg:#080912;--panel:#111426;--panel2:#171c31;
+  --text:#f4f5ff;--muted:#9299b4;--blue:#6575ff;
+  --cyan:#35d8ff;--line:#252b43;--green:#42e6a4;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+*{box-sizing:border-box}
 body{
-  background:
-  radial-gradient(ellipse at 80% 0%,#30205b 0%,transparent 35%),
-  radial-gradient(ellipse at 0% 40%,#102b43 0%,transparent 30%),
-  var(--bg);
-  color:var(--text);
-  font-family:Inter,Arial,sans-serif;
-  min-height:100vh;
+  margin:0;background:
+  radial-gradient(ellipse at 50% -20%,#24285b 0%,transparent 50%),
+  var(--bg);color:var(--text);
+  font-family:Inter,Arial,sans-serif;min-height:100vh;
 }
-a{text-decoration:none;color:inherit}
-button,select{font:inherit}
-.container{max-width:1200px;margin:auto;padding:0 22px}
-
+button,input,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+.container{width:min(1180px,92%);margin:auto}
 header{
-  position:sticky;top:0;z-index:10;
-  background:#090914eF;
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid #ffffff12;
+  position:sticky;top:0;z-index:20;
+  background:#090b16eF;backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
 }
-.nav{
-  min-height:76px;display:flex;
-  justify-content:space-between;
-  align-items:center;gap:20px;
-}
-.logo{font-size:21px;font-weight:950;letter-spacing:2px}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.logo{font-weight:950;font-size:22px;letter-spacing:1px}
 .logo span{color:var(--cyan)}
-.navlinks{display:flex;gap:27px;color:var(--muted)}
+.navlinks{display:flex;gap:22px;color:var(--muted);font-size:14px}
 .navlinks a:hover{color:white}
-.controls{display:flex;gap:9px}
+.controls{display:flex;gap:8px}
 select{
-  background:var(--panel2);color:white;
-  border:1px solid var(--border);
-  padding:10px;border-radius:10px;
+  background:var(--panel);color:white;border:1px solid var(--line);
+  padding:10px;border-radius:10px;max-width:110px;
 }
-.hero{
-  display:grid;grid-template-columns:1.2fr .8fr;
-  align-items:center;gap:35px;
-  padding:85px 0 65px;
-}
-.eyebrow{
-  color:var(--cyan);font-size:12px;
-  font-weight:800;letter-spacing:3px;
-}
-.hero h1{
-  font-size:clamp(43px,6vw,76px);
-  line-height:1.04;letter-spacing:-3px;
-  margin:18px 0;
-}
-.gradient{
-  background:linear-gradient(90deg,#9a80ff,#44dfff,#e16bff);
-  background-clip:text;color:transparent;
-}
-.hero p{color:var(--muted);font-size:17px;max-width:570px;line-height:1.8}
-.actions{display:flex;gap:13px;flex-wrap:wrap;margin-top:28px}
-.btn{
-  display:inline-block;padding:13px 21px;
-  border-radius:12px;font-weight:800;
-  border:1px solid var(--border);cursor:pointer;
-}
-.btn-primary{
-  background:linear-gradient(110deg,#7563ff,#397fff);
-  color:white;border:0;
-  box-shadow:0 8px 30px #695cff45;
-}
-.btn-secondary{background:var(--panel);color:white}
-.hero-art{
-  min-height:330px;border-radius:28px;
-  border:1px solid #8879ff55;
-  background:linear-gradient(145deg,#28205a,#10182d 55%,#291438);
-  display:grid;place-items:center;
+.hero{padding:72px 0 48px}
+.heroBox{
+  border:1px solid #343b70;border-radius:28px;padding:48px;
+  background:linear-gradient(115deg,#171b3d,#101326 65%,#182c48);
   position:relative;overflow:hidden;
 }
-.orb{
-  width:205px;height:205px;border-radius:50%;
-  background:radial-gradient(circle at 35% 30%,#c4f5ff,#766aff 40%,#32175f 75%);
-  box-shadow:0 0 90px #756cffaa;
-  display:grid;place-items:center;font-size:75px;
+.heroBox:after{
+  content:"N";position:absolute;right:7%;top:-90px;
+  font-size:360px;font-weight:1000;color:#ffffff08;
 }
-.hero-art:after{
-  content:"NEXUS";position:absolute;bottom:15px;right:20px;
-  font-size:40px;font-weight:950;letter-spacing:8px;
-  color:#ffffff16;
+.eyebrow{color:var(--cyan);font-size:12px;font-weight:800;letter-spacing:3px}
+h1{font-size:clamp(36px,6vw,65px);line-height:1.04;margin:17px 0}
+.hero p{color:#b5bdd7;max-width:550px;line-height:1.8}
+.primary{
+  border:0;background:linear-gradient(110deg,var(--blue),#398ce8);
+  color:white;padding:14px 22px;border-radius:12px;font-weight:800;
+  box-shadow:0 8px 30px #5368ff33;
 }
-.section{padding:35px 0 65px}
-.section-head{
-  display:flex;justify-content:space-between;
-  align-items:end;gap:20px;margin-bottom:25px;
+.primary:hover{filter:brightness(1.15);transform:translateY(-1px)}
+.section{padding:30px 0 55px}
+.sectionHead{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+h2{font-size:25px;margin:0 0 8px}
+.sub{color:var(--muted);font-size:14px}
+.search{
+  background:var(--panel);border:1px solid var(--line);color:white;
+  border-radius:12px;padding:13px 15px;width:min(300px,100%);
 }
-.section h2{font-size:30px;margin-top:8px}
-.muted{color:var(--muted)}
-.game-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+.games{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px}
+.game{
+  background:linear-gradient(145deg,#171b30,#101322);
+  border:1px solid var(--line);border-radius:19px;overflow:hidden;
+  transition:.2s;cursor:pointer;
 }
-.game-card{
-  background:linear-gradient(145deg,#17172d,#0e0e1c);
-  border:1px solid var(--border);
-  border-radius:19px;padding:17px;
-  transition:.25s;
+.game:hover{transform:translateY(-5px);border-color:#6876ff}
+.gameArt{
+  height:145px;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  background:radial-gradient(circle at 50% 40%,var(--glow),#121629 70%);
 }
-.game-card:hover{
-  transform:translateY(-5px);
-  border-color:#7768ff;
-  box-shadow:0 15px 40px #0005;
+.gameArt:before{
+  content:"";position:absolute;width:180px;height:180px;
+  border:1px solid #ffffff20;border-radius:50%;
 }
-.game-art{
-  height:145px;border-radius:13px;
-  display:grid;place-items:center;
-  font-size:55px;margin-bottom:17px;
-  background:linear-gradient(135deg,#29215d,#17364d);
+.gameSymbol{
+  width:85px;height:85px;border-radius:24px;
+  display:grid;place-items:center;font-size:28px;font-weight:1000;
+  color:white;background:linear-gradient(145deg,var(--accent),#111629);
+  border:1px solid #ffffff55;box-shadow:0 12px 40px #0008;
+  transform:rotate(-5deg);
 }
-.game-card h3{font-size:19px;margin-bottom:5px}
-.game-card p{color:var(--muted);font-size:13px;margin-bottom:16px}
-.game-card button{
-  width:100%;padding:11px;border-radius:10px;
-  border:1px solid #7166ff88;
-  background:#6558e51c;color:#dedaff;
-  cursor:pointer;font-weight:800;
-}
-.game-card button:hover{background:#6558e544}
-.features{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:15px;
-}
-.feature{
-  background:var(--panel);border:1px solid var(--border);
-  border-radius:17px;padding:22px;
-}
-.feature .icon{font-size:27px}
-.feature h3{margin:12px 0 7px}
-.feature p{color:var(--muted);font-size:14px;line-height:1.7}
-.notice{
-  border:1px solid #d8ad5555;
-  background:#d8ad5510;color:#e8d5a3;
-  border-radius:13px;padding:14px;
-  margin-top:22px;font-size:13px;line-height:1.7;
-}
-footer{
-  border-top:1px solid var(--border);
-  padding:30px 0;color:var(--muted);font-size:13px;
-}
-.footer-row{
-  display:flex;justify-content:space-between;
-  gap:20px;flex-wrap:wrap;align-items:center;
-}
-.telegram{
-  display:inline-block;padding:11px 16px;
-  background:#168bd0;color:white;
-  border-radius:10px;font-weight:800;
-}
+.gameInfo{padding:18px}
+.gameInfo h3{margin:0 0 7px}
+.gameInfo p{margin:0;color:var(--muted);font-size:13px}
+.gameBottom{display:flex;justify-content:space-between;align-items:center;margin-top:17px}
+.tag{font-size:11px;color:var(--cyan);background:#35d8ff13;padding:7px 9px;border-radius:7px}
+.arrow{color:var(--cyan);font-size:20px}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.feature{background:var(--panel);border:1px solid var(--line);padding:22px;border-radius:16px}
+.feature b{display:block;margin:10px 0}
+.feature p{color:var(--muted);font-size:13px;line-height:1.6}
+footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:13px}
+.footerRow{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .modal{
-  position:fixed;inset:0;background:#000c;
-  display:none;place-items:center;padding:18px;z-index:20;
+  display:none;position:fixed;inset:0;background:#000b;z-index:50;
+  padding:18px;overflow:auto;align-items:center;justify-content:center;
 }
-.modal.show{display:grid}
-.modal-box{
-  width:min(450px,100%);
-  background:#151529;border:1px solid #6258a0;
-  border-radius:20px;padding:25px;
+.modal.show{display:flex}
+.modalBox{
+  width:min(560px,100%);background:#111527;border:1px solid #303958;
+  border-radius:22px;padding:25px;position:relative;
 }
-.modal-box h2{margin-bottom:12px}
-.modal-box p{color:var(--muted);line-height:1.7;margin-bottom:15px}
-.modal-box button{margin-top:12px}
-[dir="rtl"] .nav,[dir="rtl"] .section-head{direction:rtl}
+.close{
+  position:absolute;right:17px;top:15px;border:0;
+  background:#252b43;color:white;width:35px;height:35px;border-radius:10px;
+}
+.packageGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:17px 0}
+.package{
+  text-align:left;background:var(--panel2);border:1px solid var(--line);
+  color:white;padding:15px;border-radius:12px;
+}
+.package.selected{border-color:var(--cyan);background:#172b3c}
+.package small{display:block;color:var(--muted);margin-top:6px}
+.field{margin:14px 0}
+.field label{display:block;color:#bdc4dc;font-size:13px;margin-bottom:8px}
+.field input{
+  width:100%;background:#090d1b;color:white;border:1px solid var(--line);
+  border-radius:11px;padding:14px;outline:none;
+}
+.field input:focus{border-color:var(--blue)}
+.notice{font-size:12px;color:var(--muted);line-height:1.6}
+.status{padding:12px;border-radius:10px;background:#202744;color:#bfcaff;font-size:13px;margin-top:12px}
+.orders{display:none;margin-top:20px}
+.orderItem{padding:15px;border:1px solid var(--line);border-radius:12px;margin:10px 0;background:var(--panel)}
 @media(max-width:800px){
-  .navlinks{display:none}
-  .hero{grid-template-columns:1fr;padding-top:55px}
-  .hero-art{min-height:250px}
-  .game-grid{grid-template-columns:repeat(2,1fr)}
-  .features{grid-template-columns:1fr}
+ .games{grid-template-columns:repeat(2,1fr)}
+ .navlinks{display:none}.heroBox{padding:30px 22px}
+ .features{grid-template-columns:1fr}
 }
-@media(max-width:520px){
-  .container{padding:0 15px}
-  .logo{font-size:16px}
-  .nav{min-height:67px}
-  .controls select{padding:8px 6px}
-  .hero h1{letter-spacing:-2px}
-  .game-grid{grid-template-columns:1fr}
-  .game-art{height:120px}
+@media(max-width:480px){
+ .games{grid-template-columns:1fr}
+ .hero{padding-top:35px}
+ .heroBox{padding:27px 20px}
+ .logo{font-size:18px}
 }
 </style>
 </head>
-
 <body>
 
 <header>
-  <div class="container nav">
-    <a class="logo" href="#">NEXUS <span>TOP UP</span></a>
-
-    <nav class="navlinks">
-      <a href="#games" data-t="games">Games</a>
-      <a href="#how" data-t="how">How it works</a>
-      <a href="#support" data-t="support">Support</a>
-    </nav>
-
-    <div class="controls">
-      <select id="language" aria-label="Language">
-        <option value="en">EN</option>
-        <option value="uz">UZ</option>
-        <option value="ru">RU</option>
-        <option value="tr">TR</option>
-        <option value="es">ES</option>
-        <option value="ar">AR</option>
-      </select>
-
-      <select id="currency" aria-label="Currency">
-        <option value="USD">USD</option>
-        <option value="UZS">UZS</option>
-      </select>
-    </div>
+ <div class="container nav">
+  <a class="logo" href="#">NEXUS<span>.</span>TOP UP</a>
+  <nav class="navlinks">
+   <a href="#games" data-i18n="games">O‘yinlar</a>
+   <a href="#features" data-i18n="features">Imkoniyatlar</a>
+   <a href="#orders" data-i18n="orders">Buyurtmalar</a>
+  </nav>
+  <div class="controls">
+   <select id="language" aria-label="Language">
+    <option value="uz">UZ</option><option value="en">EN</option>
+    <option value="ru">RU</option><option value="tr">TR</option>
+    <option value="es">ES</option><option value="ar">AR</option>
+   </select>
+   <select id="currency" aria-label="Currency">
+    <option value="UZS">UZS</option><option value="USD">USD</option>
+   </select>
   </div>
+ </div>
 </header>
 
-<main class="container">
-
-<section class="hero">
-  <div>
-    <div class="eyebrow" data-t="eyebrow">GLOBAL GAMING MARKETPLACE</div>
-
-    <h1 data-t="headline">
-      Power up your<br>
-      <span class="gradient">game.</span> Own the next level.
-    </h1>
-
-    <p data-t="intro">
-      Your global destination for gaming top-ups.
-      Choose your game and get ready for the next level.
-    </p>
-
-    <div class="actions">
-      <a href="#games" class="btn btn-primary" data-t="explore">Explore games</a>
-      <a href="https://t.me/Jorabekovich09"
-         target="_blank" rel="noopener noreferrer"
-         class="btn btn-secondary" data-t="contact">
-         Contact support
-      </a>
-    </div>
-
-    <div class="notice" data-t="notice">
-      Preview mode: checkout and real payments are not active yet.
-    </div>
+<main>
+ <section class="hero container">
+  <div class="heroBox">
+   <div class="eyebrow">NEXT GENERATION GAMING MARKETPLACE</div>
+   <h1>LEVEL UP<br><span style="color:var(--cyan)">YOUR GAME.</span></h1>
+   <p data-i18n="heroText">Sevimli o‘yinlaringiz uchun top-up paketlarini tanlang. Buyurtmangizni qulay va tartibli boshqaring.</p>
+   <a href="#games"><button class="primary" data-i18n="explore">Katalogni ko‘rish ↗</button></a>
   </div>
+ </section>
 
-  <div class="hero-art">
-    <div class="orb">✦</div>
+ <section class="section container" id="games">
+  <div class="sectionHead">
+   <div><h2 data-i18n="catalog">O‘yinlar katalogi</h2>
+   <div class="sub" data-i18n="catalogSub">O‘yiningizni tanlang va paketlarni ko‘ring</div></div>
+   <input id="search" class="search" placeholder="O‘yin qidirish...">
   </div>
-</section>
+  <div class="games" id="gameList"></div>
+ </section>
 
-<section class="section" id="games">
-  <div class="section-head">
-    <div>
-      <div class="eyebrow" data-t="catalog">CATALOG</div>
-      <h2 data-t="popular">Popular games</h2>
-    </div>
-    <span class="muted" data-t="coming">More coming soon</span>
-  </div>
-
-  <div class="game-grid">
-
-    <article class="game-card">
-      <div class="game-art">🔥</div>
-      <h3>Free Fire</h3>
-      <p data-t="ffdesc">Diamonds and game credits</p>
-      <button onclick="showGame('Free Fire')" data-t="view">View packages</button>
-    </article>
-
-    <article class="game-card">
-      <div class="game-art">⚔️</div>
-      <h3>PUBG Mobile</h3>
-      <p data-t="pubgdesc">UC packages</p>
-      <button onclick="showGame('PUBG Mobile')" data-t="view">View packages</button>
-    </article>
-
-    <article class="game-card">
-      <div class="game-art">🌟</div>
-      <h3>Mobile Legends</h3>
-      <p data-t="mldesc">Diamonds and bundles</p>
-      <button onclick="showGame('Mobile Legends')" data-t="view">View packages</button>
-    </article>
-
-  </div>
-</section>
-
-<section class="section" id="how">
-  <div class="section-head">
-    <div>
-      <div class="eyebrow" data-t="process">SIMPLE PROCESS</div>
-      <h2 data-t="howtitle">How it works</h2>
-    </div>
-  </div>
-
+ <section class="section container" id="features">
+  <h2 data-i18n="why">Nega NEXUS?</h2>
+  <div class="sub" style="margin-bottom:22px" data-i18n="whySub">Barcha jarayon bir joyda.</div>
   <div class="features">
-    <div class="feature">
-      <div class="icon">🎮</div>
-      <h3 data-t="step1">Choose a game</h3>
-      <p data-t="step1p">Find your game and select a package.</p>
-    </div>
-
-    <div class="feature">
-      <div class="icon">🧾</div>
-      <h3 data-t="step2">Enter player details</h3>
-      <p data-t="step2p">Provide your Player ID and server details.</p>
-    </div>
-
-    <div class="feature">
-      <div class="icon">🚀</div>
-      <h3 data-t="step3">Track your order</h3>
-      <p data-t="step3p">Follow your order after the store launches.</p>
-    </div>
+   <div class="feature"><span>◈</span><b data-i18n="f1">Tartibli katalog</b><p data-i18n="f1p">O‘yinlar va paketlar bitta qulay interfeysda.</p></div>
+   <div class="feature"><span>◎</span><b data-i18n="f2">Buyurtma kuzatuvi</b><p data-i18n="f2p">Buyurtma raqamingiz va holatini tekshirish imkoniyati.</p></div>
+   <div class="feature"><span>✧</span><b data-i18n="f3">Yordam xizmati</b><p data-i18n="f3p">Savollaringiz bo‘lsa Telegram orqali bog‘laning.</p></div>
   </div>
-</section>
+ </section>
 
+ <section class="section container" id="orders">
+  <h2 data-i18n="orderHistory">Buyurtmalarim</h2>
+  <p class="sub" data-i18n="orderHistorySub">Ushbu qurilmadan yuborilgan demo buyurtmalar.</p>
+  <div id="orderHistoryList" class="orders"></div>
+ </section>
 </main>
 
-<footer id="support">
-  <div class="container footer-row">
-    <div>
-      <strong>NEXUS TOP UP</strong><br>
-      <span data-t="footer">Global gaming marketplace</span>
-    </div>
-
-    <a class="telegram"
-       href="https://t.me/Jorabekovich09"
-       target="_blank"
-       rel="noopener noreferrer">
-       Telegram Support
-    </a>
-
-    <span>© <span id="year"></span> NEXUS TOP UP</span>
-  </div>
+<footer>
+ <div class="container footerRow">
+  <div><b class="logo">NEXUS<span>.</span>TOP UP</b><p>© 2026 NEXUS TOP UP</p></div>
+  <div><p data-i18n="support">Yordam kerakmi?</p><a style="color:var(--cyan)" href="https://t.me/Jorabekovich09" target="_blank" rel="noopener noreferrer">@Jorabekovich09 ↗</a></div>
+  <div><p>Secure • Simple • Gaming</p><p>Demo storefront</p></div>
+ </div>
 </footer>
 
-<div class="modal" id="modal" role="dialog" aria-modal="true">
-  <div class="modal-box">
-    <h2 id="modalTitle">Game packages</h2>
-    <p data-t="modalText">
-      The game catalog is being prepared. Packages will be available soon.
-    </p>
-    <button class="btn btn-primary" onclick="closeModal()" data-t="close">
-      Close
-    </button>
+<div class="modal" id="gameModal">
+ <div class="modalBox">
+  <button class="close" onclick="closeModal()">✕</button>
+  <div class="eyebrow">NEXUS GAME STORE</div>
+  <h2 id="modalTitle" style="margin-top:13px">Game</h2>
+  <p class="sub" id="modalSub">Paketni tanlang</p>
+  <div class="packageGrid" id="packageList"></div>
+  <div class="field">
+   <label id="playerLabel">Player ID</label>
+   <input id="playerId" placeholder="O‘yin ID raqamingiz">
   </div>
+  <div class="field">
+   <label id="serverLabel">Server / Region (agar kerak bo‘lsa)</label>
+   <input id="serverId" placeholder="Server (ixtiyoriy)">
+  </div>
+  <div class="field">
+   <label>Email (ixtiyoriy)</label>
+   <input id="email" type="email" placeholder="example@email.com">
+  </div>
+  <button class="primary" style="width:100%" id="submitOrder" onclick="submitOrder()">Demo buyurtma yuborish</button>
+  <div id="formMessage"></div>
+  <p class="notice">Bu hozircha demo buyurtma. To‘lov amalga oshmaydi va paket avtomatik yetkazilmaydi. O‘yin akkauntingiz parolini hech qachon kiritmang.</p>
+ </div>
 </div>
 
 <script>
-/* ==================================
-   NEXUS TOP UP CONFIGURATION
-================================== */
-
-const SUPABASE_URL =
-  "https://xdfwhzhhrnapqldfrbsr.supabase.co";
-
-const SUPABASE_PUBLISHABLE_KEY =
-  "sb_publishable_dibm89IcPFuf1o1nEy2faQ_jnqAyXga";
-
-/*
-  Public frontend configuration only.
-  Never put service_role or payment secrets here.
-  Live checkout remains disabled in this version.
+/* NEXUS CONFIGURATION
+   Faqat publishable/anon key frontendda bo‘lishi mumkin.
+   service_role keyni bu faylga hech qachon qo‘ymang.
 */
+const SUPABASE_URL = "https://xdfwhzhhrnapqldfrbsr.supabase.co";
+const SUPABASE_KEY = "sb_publishable_dibm89IcPFuf1o1nEy2faQ_jnqAyXga";
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-const LIVE_CHECKOUT_ENABLED = false;
+/* Paket miqdorlari. Narxlar tasdiqlanmagani uchun null. */
+const games = [
+ {id:"freefire",name:"Free Fire",symbol:"FF",type:"Diamonds",accent:"#ff9d38",glow:"#59311d",
+  packages:[100,310,520,1060,2180,5600]},
+ {id:"pubg",name:"PUBG Mobile",symbol:"PUBG",type:"UC",accent:"#d7a34b",glow:"#59451f",
+  packages:[60,325,660,1800,3850,8100]},
+ {id:"codm",name:"Call of Duty Mobile",symbol:"COD",type:"CP",accent:"#d9dce6",glow:"#42485c",
+  packages:[80,420,880,2400,5000]},
+ {id:"ml",name:"Mobile Legends",symbol:"ML",type:"Diamonds",accent:"#48a9ff",glow:"#173e6c",
+  packages:[86,172,257,706,1412]},
+ {id:"genshin",name:"Genshin Impact",symbol:"GI",type:"Genesis Crystals",accent:"#b38cff",glow:"#432c69",
+  packages:[60,300,980,1980,3280]},
+ {id:"valorant",name:"Valorant",symbol:"V",type:"VP",accent:"#ff5269",glow:"#642433",
+  packages:[475,1000,2050,3650,5350]}
+];
 
-
-/* ==================================
-   LANGUAGE SYSTEM
-================================== */
-
-const translations = {
-
-en:{
-games:"Games",how:"How it works",support:"Support",
-eyebrow:"GLOBAL GAMING MARKETPLACE",
-headline:'Power up your<br><span class="gradient">game.</span> Own the next level.',
-intro:"Your global destination for gaming top-ups. Choose your game and get ready for the next level.",
-explore:"Explore games",contact:"Contact support",
-notice:"Preview mode: checkout and real payments are not active yet.",
-catalog:"CATALOG",popular:"Popular games",coming:"More coming soon",
-ffdesc:"Diamonds and game credits",pubgdesc:"UC packages",
-mldesc:"Diamonds and bundles",view:"View packages",
-process:"SIMPLE PROCESS",howtitle:"How it works",
-step1:"Choose a game",step1p:"Find your game and select a package.",
-step2:"Enter player details",step2p:"Provide your Player ID and server details.",
-step3:"Track your order",step3p:"Follow your order after the store launches.",
-footer:"Global gaming marketplace",modalText:"The game catalog is being prepared. Packages will be available soon.",
-close:"Close"
-},
-
-uz:{
-games:"O‘yinlar",how:"Qanday ishlaydi",support:"Yordam",
-eyebrow:"GLOBAL O‘YINLAR BOZORI",
-headline:'O‘yiningni<br><span class="gradient">kuchaytir.</span> Keyingi bosqichga chiq.',
-intro:"O‘yinlar uchun global top-up platformasi. O‘yinni tanlang va keyingi bosqichga tayyorlaning.",
-explore:"O‘yinlarni ko‘rish",contact:"Yordamga yozish",
-notice:"Sinov rejimi: buyurtma va haqiqiy to‘lovlar hali faol emas.",
-catalog:"KATALOG",popular:"Mashhur o‘yinlar",coming:"Yangi o‘yinlar tez orada",
-ffdesc:"Olmoslar va o‘yin kreditlari",pubgdesc:"UC paketlari",
-mldesc:"Olmoslar va to‘plamlar",view:"Paketlarni ko‘rish",
-process:"ODDIY JARAYON",howtitle:"Qanday ishlaydi",
-step1:"O‘yinni tanlang",step1p:"O‘yinni toping va kerakli paketni tanlang.",
-step2:"O‘yinchi ma’lumotlari",step2p:"Player ID va server ma’lumotlarini kiriting.",
-step3:"Buyurtmani kuzating",step3p:"Do‘kon ishga tushgach buyurtmangizni kuzating.",
-footer:"Global gaming marketplace",modalText:"O‘yinlar katalogi tayyorlanmoqda. Paketlar tez orada qo‘shiladi.",
-close:"Yopish"
-},
-
-ru:{
-games:"Игры",how:"Как это работает",support:"Поддержка",
-eyebrow:"ГЛОБАЛЬНЫЙ ИГРОВОЙ МАРКЕТПЛЕЙС",
-headline:'Усиль свою<br><span class="gradient">игру.</span> Новый уровень.',
-intro:"Глобальная платформа для пополнения игр. Выберите игру и готовьтесь к новому уровню.",
-explore:"Выбрать игру",contact:"Связаться с поддержкой",
-notice:"Демо-режим: заказы и реальные платежи пока отключены.",
-catalog:"КАТАЛОГ",popular:"Популярные игры",coming:"Скоро появятся новые игры",
-ffdesc:"Алмазы и игровые кредиты",pubgdesc:"Пакеты UC",
-mldesc:"Алмазы и наборы",view:"Посмотреть пакеты",
-process:"ПРОСТОЙ ПРОЦЕСС",howtitle:"Как это работает",
-step1:"Выберите игру",step1p:"Найдите игру и выберите нужный пакет.",
-step2:"Данные игрока",step2p:"Укажите Player ID и сервер.",
-step3:"Следите за заказом",step3p:"Отслеживайте заказ после запуска магазина.",
-footer:"Глобальный игровой маркетплейс",
-modalText:"Каталог игр готовится. Пакеты появятся в ближайшее время.",
-close:"Закрыть"
-},
-
-tr:{
-games:"Oyunlar",how:"Nasıl çalışır",support:"Destek",
-eyebrow:"KÜRESEL OYUN PAZARI",
-headline:'Oyununun<br><span class="gradient">gücünü artır.</span> Yeni seviyeye çık.',
-intro:"Oyun yüklemeleri için küresel platform. Oyununuzu seçin ve yeni seviyeye hazırlanın.",
-explore:"Oyunları keşfet",contact:"Desteğe ulaş",
-notice:"Önizleme modu: gerçek ödemeler henüz etkin değil.",
-catalog:"KATALOG",popular:"Popüler oyunlar",coming:"Daha fazla oyun yakında",
-ffdesc:"Elmaslar ve oyun kredileri",pubgdesc:"UC paketleri",
-mldesc:"Elmaslar ve paketler",view:"Paketleri gör",
-process:"BASİT SÜREÇ",howtitle:"Nasıl çalışır",
-step1:"Oyun seç",step1p:"Oyununuzu bulun ve paket seçin.",
-step2:"Oyuncu bilgileri",step2p:"Player ID ve sunucu bilgilerini girin.",
-step3:"Siparişini takip et",step3p:"Mağaza açıldığında siparişinizi takip edin.",
-footer:"Küresel oyun pazarı",
-modalText:"Oyun kataloğu hazırlanıyor. Paketler yakında eklenecek.",
-close:"Kapat"
-},
-
-es:{
-games:"Juegos",how:"Cómo funciona",support:"Soporte",
-eyebrow:"MERCADO GLOBAL DE JUEGOS",
-headline:'Potencia tu<br><span class="gradient">juego.</span> Sube de nivel.',
-intro:"Tu destino global para recargas de juegos. Elige un juego y prepárate para el siguiente nivel.",
-explore:"Ver juegos",contact:"Contactar soporte",
-notice:"Modo de vista previa: los pagos reales aún no están activos.",
-catalog:"CATÁLOGO",popular:"Juegos populares",coming:"Más juegos próximamente",
-ffdesc:"Diamantes y créditos",pubgdesc:"Paquetes UC",
-mldesc:"Diamantes y paquetes",view:"Ver paquetes",
-process:"PROCESO SENCILLO",howtitle:"Cómo funciona",
-step1:"Elige un juego",step1p:"Encuentra tu juego y selecciona un paquete.",
-step2:"Datos del jugador",step2p:"Introduce tu ID y servidor.",
-step3:"Sigue tu pedido",step3p:"Sigue tu pedido cuando la tienda esté activa.",
-footer:"Mercado global de juegos",
-modalText:"El catálogo está en preparación. Los paquetes estarán disponibles pronto.",
-close:"Cerrar"
-},
-
-ar:{
-games:"الألعاب",how:"كيف يعمل",support:"الدعم",
-eyebrow:"سوق ألعاب عالمي",
-headline:'عزّز<br><span class="gradient">لعبتك.</span> انتقل للمستوى التالي.',
-intro:"منصتك العالمية لشحن الألعاب. اختر لعبتك واستعد للمستوى التالي.",
-explore:"استكشف الألعاب",contact:"تواصل مع الدعم",
-notice:"وضع المعاينة: المدفوعات الحقيقية غير متاحة بعد.",
-catalog:"الكتالوج",popular:"الألعاب الشائعة",coming:"المزيد قريبًا",
-ffdesc:"ألماس وأرصدة ألعاب",pubgdesc:"باقات UC",
-mldesc:"ألماس وحزم",view:"عرض الباقات",
-process:"خطوات بسيطة",howtitle:"كيف يعمل",
-step1:"اختر لعبة",step1p:"ابحث عن لعبتك واختر الباقة.",
-step2:"بيانات اللاعب",step2p:"أدخل معرّف اللاعب والخادم.",
-step3:"تتبع الطلب",step3p:"تابع طلبك بعد إطلاق المتجر.",
-footer:"سوق ألعاب عالمي",
-modalText:"يتم إعداد كتالوج الألعاب. ستتوفر الباقات قريبًا.",
-close:"إغلاق"
-}
-
+const translations={
+ uz:{games:"O‘yinlar",features:"Imkoniyatlar",orders:"Buyurtmalar",heroText:"Sevimli o‘yinlaringiz uchun top-up paketlarini tanlang. Buyurtmangizni qulay va tartibli boshqaring.",explore:"Katalogni ko‘rish ↗",catalog:"O‘yinlar katalogi",catalogSub:"O‘yiningizni tanlang va paketlarni ko‘ring",why:"Nega NEXUS?",whySub:"Barcha jarayon bir joyda.",f1:"Tartibli katalog",f1p:"O‘yinlar va paketlar bitta qulay interfeysda.",f2:"Buyurtma kuzatuvi",f2p:"Buyurtma raqamingiz va holatini tekshirish imkoniyati.",f3:"Yordam xizmati",f3p:"Savollaringiz bo‘lsa Telegram orqali bog‘laning.",orderHistory:"Buyurtmalarim",orderHistorySub:"Ushbu qurilmadan yuborilgan demo buyurtmalar.",support:"Yordam kerakmi?",choose:"Paketni tanlang",send:"Demo buyurtma yuborish",search:"O‘yin qidirish..."},
+ en:{games:"Games",features:"Features",orders:"Orders",heroText:"Choose top-up packages for your favorite games. Manage your orders in one place.",explore:"Explore catalog ↗",catalog:"Game catalog",catalogSub:"Choose a game and explore packages",why:"Why NEXUS?",whySub:"Everything in one place.",f1:"Organized catalog",f1p:"Games and packages in one convenient interface.",f2:"Order tracking",f2p:"Check your order number and status.",f3:"Support",f3p:"Contact us on Telegram if you need help.",orderHistory:"My orders",orderHistorySub:"Demo orders submitted from this device.",support:"Need help?",choose:"Choose a package",send:"Submit demo order",search:"Search games..."},
+ ru:{games:"Игры",features:"Возможности",orders:"Заказы",heroText:"Выбирайте пакеты для любимых игр и управляйте заказами в одном месте.",explore:"Открыть каталог ↗",catalog:"Каталог игр",catalogSub:"Выберите игру и пакет",why:"Почему NEXUS?",whySub:"Всё в одном месте.",f1:"Каталог",f1p:"Игры и пакеты в удобном интерфейсе.",f2:"Отслеживание",f2p:"Проверяйте номер и статус заказа.",f3:"Поддержка",f3p:"Свяжитесь с нами через Telegram.",orderHistory:"Мои заказы",orderHistorySub:"Демо-заказы с этого устройства.",support:"Нужна помощь?",choose:"Выберите пакет",send:"Отправить демо-заказ",search:"Поиск игр..."},
+ tr:{games:"Oyunlar",features:"Özellikler",orders:"Siparişler",heroText:"Favori oyunlarınız için paket seçin ve siparişlerinizi yönetin.",explore:"Kataloğu keşfet ↗",catalog:"Oyun kataloğu",catalogSub:"Bir oyun ve paket seçin",why:"Neden NEXUS?",whySub:"Her şey tek yerde.",f1:"Düzenli katalog",f1p:"Oyunlar ve paketler tek arayüzde.",f2:"Sipariş takibi",f2p:"Sipariş numaranızı ve durumunu kontrol edin.",f3:"Destek",f3p:"Yardım için Telegram üzerinden ulaşın.",orderHistory:"Siparişlerim",orderHistorySub:"Bu cihazdan gönderilen demo siparişler.",support:"Yardıma mı ihtiyacınız var?",choose:"Paket seçin",send:"Demo sipariş gönder",search:"Oyun ara..."},
+ es:{games:"Juegos",features:"Funciones",orders:"Pedidos",heroText:"Elige paquetes para tus juegos favoritos y administra tus pedidos.",explore:"Ver catálogo ↗",catalog:"Catálogo de juegos",catalogSub:"Elige un juego y un paquete",why:"¿Por qué NEXUS?",whySub:"Todo en un solo lugar.",f1:"Catálogo",f1p:"Juegos y paquetes en una interfaz.",f2:"Seguimiento",f2p:"Consulta el número y estado del pedido.",f3:"Soporte",f3p:"Contáctanos por Telegram.",orderHistory:"Mis pedidos",orderHistorySub:"Pedidos de demostración de este dispositivo.",support:"¿Necesitas ayuda?",choose:"Elige un paquete",send:"Enviar pedido de prueba",search:"Buscar juegos..."},
+ ar:{games:"الألعاب",features:"المميزات",orders:"الطلبات",heroText:"اختر باقات ألعابك المفضلة وأدر طلباتك بسهولة.",explore:"استكشف الكتالوج ↗",catalog:"كتالوج الألعاب",catalogSub:"اختر لعبة وباقة",why:"لماذا NEXUS؟",whySub:"كل شيء في مكان واحد.",f1:"كتالوج منظم",f1p:"الألعاب والباقات في واجهة واحدة.",f2:"تتبع الطلب",f2p:"تحقق من رقم الطلب وحالته.",f3:"الدعم",f3p:"تواصل معنا عبر تيليجرام.",orderHistory:"طلباتي",orderHistorySub:"طلبات تجريبية من هذا الجهاز.",support:"هل تحتاج إلى مساعدة؟",choose:"اختر باقة",send:"إرسال طلب تجريبي",search:"ابحث عن لعبة..."}
 };
 
-function setLanguage(language){
+let selectedGame=null,selectedPackage=null;
+const $=id=>document.getElementById(id);
 
-  const dictionary =
-    translations[language] || translations.en;
-
-  document.documentElement.lang = language;
-
-  document.documentElement.dir =
-    language === "ar" ? "rtl" : "ltr";
-
-  document.querySelectorAll("[data-t]").forEach(element=>{
-
-    const key = element.dataset.t;
-
-    if(dictionary[key]){
-      element.innerHTML = dictionary[key];
-    }
-
-  });
-
-  localStorage.setItem("nexus_language",language);
+function renderGames(filter=""){
+ $("gameList").innerHTML="";
+ games.filter(g=>g.name.toLowerCase().includes(filter.toLowerCase()))
+ .forEach(g=>{
+  const card=document.createElement("article");
+  card.className="game";
+  card.innerHTML=`
+   <div class="gameArt" style="--accent:${g.accent};--glow:${g.glow}">
+    <div class="gameSymbol">${g.symbol}</div>
+   </div>
+   <div class="gameInfo">
+    <h3>${g.name}</h3><p>${g.type}</p>
+    <div class="gameBottom"><span class="tag">TOP UP</span><span class="arrow">↗</span></div>
+   </div>`;
+  card.addEventListener("click",()=>openGame(g.id));
+  $("gameList").appendChild(card);
+ });
 }
+function openGame(id){
+ selectedGame=games.find(g=>g.id===id);
+ selectedPackage=null;
+ $("modalTitle").textContent=selectedGame.name;
+ $("modalSub").textContent=translations[$("language").value].choose;
+ $("packageList").innerHTML="";
+ selectedGame.packages.forEach((amount,i)=>{
+  const btn=document.createElement("button");
+  btn.className="package";
+  btn.innerHTML=`<b>${amount.toLocaleString()} ${selectedGame.type}</b><small>Price: to be confirmed</small>`;
+  btn.onclick=()=>{
+   selectedPackage=amount;
+   document.querySelectorAll(".package").forEach(x=>x.classList.remove("selected"));
+   btn.classList.add("selected");
+  };
+  $("packageList").appendChild(btn);
+ });
+ $("playerId").value="";$("serverId").value="";$("email").value="";
+ $("formMessage").innerHTML="";
+ $("gameModal").classList.add("show");
+}
+function closeModal(){$("gameModal").classList.remove("show")}
+$("gameModal").addEventListener("click",e=>{if(e.target===$("gameModal"))closeModal()});
 
-const languageSelect =
-  document.getElementById("language");
-
-languageSelect.addEventListener("change",event=>{
-  setLanguage(event.target.value);
+async function submitOrder(){
+ const playerId=$("playerId").value.trim();
+ const serverId=$("serverId").value.trim();
+ const email=$("email").value.trim();
+ if(!selectedGame||!selectedPackage){showMessage("Avval paketni tanlang.");return}
+ if(playerId.length<3){showMessage("Player ID ni to‘g‘ri kiriting.");return}
+ if(email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showMessage("Email manzilini tekshiring.");return}
+ const btn=$("submitOrder");btn.disabled=true;btn.textContent="Yuborilmoqda...";
+ const payload={
+  game_name:selectedGame.name,
+  package_name:selectedPackage+" "+selectedGame.type,
+  player_id:playerId,
+  status:"demo_pending"
+ };
+ try{
+  const {data,error}=await db.from("demo_orders").insert(payload).select("id").single();
+  if(error)throw error;
+  const order={id:data.id,game:selectedGame.name,pack:payload.package_name,player:playerId,server:serverId,status:"Demo — tekshirilmoqda",date:new Date().toLocaleString()};
+  saveLocalOrder(order);
+  showMessage("Demo buyurtma yuborildi. Raqam: "+data.id);
+  renderOrderHistory();
+ }catch(err){
+  console.error(err);
+  showMessage("Buyurtma yuborilmadi. Internet yoki Supabase sozlamalarini tekshiring.");
+ }finally{
+  btn.disabled=false;btn.textContent=translations[$("language").value].send;
+ }
+}
+function showMessage(message){$("formMessage").innerHTML="";const el=document.createElement("div");el.className="status";el.textContent=message;$("formMessage").appendChild(el)}
+function saveLocalOrder(order){
+ const list=JSON.parse(localStorage.getItem("nexus_demo_orders")||"[]");
+ list.unshift(order);localStorage.setItem("nexus_demo_orders",JSON.stringify(list.slice(0,30)));
+}
+function renderOrderHistory(){
+ const list=JSON.parse(localStorage.getItem("nexus_demo_orders")||"[]");
+ const box=$("orderHistoryList");box.innerHTML="";box.style.display="block";
+ if(!list.length){box.textContent="Hozircha buyurtmalar yo‘q.";return}
+ list.forEach(o=>{
+  const item=document.createElement("div");item.className="orderItem";
+  const title=document.createElement("b");title.textContent=o.game+" — "+o.pack;
+  const info=document.createElement("p");info.className="sub";info.textContent="ID: "+o.player+" • "+o.date;
+  const status=document.createElement("div");status.className="tag";status.textContent=o.status;
+  item.append(title,info,status);box.appendChild(item);
+ });
+}
+function applyLanguage(){
+ const lang=translations[$("language").value]||translations.uz;
+ document.querySelectorAll("[data-i18n]").forEach(el=>{
+  const key=el.dataset.i18n;if(lang[key])el.textContent=lang[key];
+ });
+ $("search").placeholder=lang.search;
+ $("submitOrder").textContent=lang.send;
+ if(selectedGame)$("modalSub").textContent=lang.choose;
+ document.documentElement.dir=$("language").value==="ar"?"rtl":"ltr";
+}
+$("language").addEventListener("change",applyLanguage);
+$("currency").addEventListener("change",()=>{
+ const c=$("currency").value;
+ alert(c==="USD"?"USD tanlandi. Narxlar hali sozlanmagan.":"UZS tanlandi. Narxlar hali sozlanmagan.");
 });
-
-const savedLanguage =
-  localStorage.getItem("nexus_language");
-
-if(savedLanguage && translations[savedLanguage]){
-  languageSelect.value = savedLanguage;
-  setLanguage(savedLanguage);
-}
-
-
-/* ==================================
-   CURRENCY SELECTOR
-================================== */
-
-const currencySelect =
-  document.getElementById("currency");
-
-const savedCurrency =
-  localStorage.getItem("nexus_currency");
-
-if(savedCurrency === "USD" || savedCurrency === "UZS"){
-  currencySelect.value = savedCurrency;
-}
-
-currencySelect.addEventListener("change",event=>{
-  localStorage.setItem(
-    "nexus_currency",
-    event.target.value
-  );
-});
-
-
-/* ==================================
-   GAME PREVIEW
-================================== */
-
-function showGame(gameName){
-
-  document.getElementById("modalTitle").textContent =
-    gameName + " — NEXUS TOP UP";
-
-  document.getElementById("modal")
-    .classList.add("show");
-
-}
-
-function closeModal(){
-
-  document.getElementById("modal")
-    .classList.remove("show");
-
-}
-
-document.getElementById("modal")
-.addEventListener("click",event=>{
-
-  if(event.target.id === "modal"){
-    closeModal();
-  }
-
-});
-
-
-/* ==================================
-   INITIALIZATION
-================================== */
-
-document.getElementById("year").textContent =
-  new Date().getFullYear();
-
-console.log("NEXUS TOP UP initialized.");
-console.log("Supabase project:",SUPABASE_URL);
-console.log("Live checkout:",LIVE_CHECKOUT_ENABLED);
-
+$("search").addEventListener("input",e=>renderGames(e.target.value));
+renderGames();
+renderOrderHistory();
+applyLanguage();
 </script>
-
 </body>
 </html>
- 
