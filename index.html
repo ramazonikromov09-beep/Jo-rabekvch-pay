@@ -313,9 +313,9 @@ async function sendOrder() {
         document.getElementById("product").value = "";
         document.getElementById("contact").value = "";
 
-    } catch (error) {
-        console.error(error);
-        alert("❌ Buyurtma yuborilmadi. Qayta urinib ko‘ring.");
+   } catch (error) {
+    console.error(error);
+    alert("XATO: " + error.message);
     } finally {
         button.disabled = false;
         button.textContent = "Buyurtma yuborish";
