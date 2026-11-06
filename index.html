@@ -9,167 +9,83 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{
- --bg:#080808;
- --surface:#111;
- --surface2:#191919;
- --surface3:#222;
- --text:#fff;
- --muted:#aaa;
- --line:#303030;
- --accent:#f4f4f4;
- --success:#d7d7d7;
+ --bg:#080808;--surface:#111;--surface2:#191919;
+ --text:#fff;--muted:#aaa;--line:#303030;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{
- margin:0;background:var(--bg);color:var(--text);
- font-family:Inter,Arial,sans-serif;
-}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
 button,input,select{font:inherit}
 button{cursor:pointer}
 a{color:inherit;text-decoration:none}
 .container{width:min(1180px,92%);margin:auto}
-header{
- position:sticky;top:0;z-index:20;
- background:#090909ed;backdrop-filter:blur(18px);
- border-bottom:1px solid var(--line);
-}
-.nav{
- min-height:74px;display:flex;align-items:center;
- justify-content:space-between;gap:15px;
-}
-.logo{font-weight:950;font-size:20px;letter-spacing:1px}
+header{position:sticky;top:0;z-index:20;background:#090909ed;backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.logo{font-weight:950;font-size:18px;letter-spacing:1px}
 .logo span{color:#999}
-.navlinks{display:flex;gap:22px;color:var(--muted);font-size:14px}
-.navlinks a:hover{color:#fff}
-.controls{display:flex;gap:8px}
-select{
- background:#171717;color:white;border:1px solid #393939;
- padding:10px;border-radius:9px;
-}
-.hero{padding:55px 0 35px}
-.heroBox{
- min-height:320px;border:1px solid #454545;border-radius:22px;
- padding:45px;display:flex;flex-direction:column;
- justify-content:center;overflow:hidden;position:relative;
- background:
- radial-gradient(ellipse at 85% 45%,#4445,transparent 40%),
- linear-gradient(115deg,#242424,#080808 75%);
-}
-.heroBox:after{
- content:"TOP UP";position:absolute;right:-20px;bottom:-35px;
- font-size:clamp(70px,13vw,165px);font-weight:1000;
- color:#ffffff08;white-space:nowrap;
-}
+.navlinks{display:flex;gap:20px;color:var(--muted);font-size:13px}
+.navlinks a:hover{color:white}
+select{background:#171717;color:white;border:1px solid #393939;padding:10px;border-radius:9px}
+.hero{padding:45px 0 30px}
+.heroBox{min-height:300px;border:1px solid #454545;border-radius:22px;padding:40px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;position:relative;background:radial-gradient(ellipse at 85% 45%,#4445,transparent 40%),linear-gradient(115deg,#242424,#080808 75%)}
+.heroBox:after{content:"TOP UP";position:absolute;right:-20px;bottom:-35px;font-size:clamp(70px,13vw,165px);font-weight:1000;color:#ffffff08;white-space:nowrap}
 .eyebrow{font-size:11px;letter-spacing:3px;color:#bbb;font-weight:800}
 h1{font-size:clamp(38px,6vw,66px);line-height:1.02;margin:18px 0}
 .hero p{color:#bbb;max-width:550px;line-height:1.8}
-.btn{
- display:inline-flex;align-items:center;justify-content:center;
- background:#fff;color:#080808;border:1px solid white;
- padding:13px 21px;border-radius:10px;font-weight:800;
- transition:.2s;
-}
-.btn:hover{background:#ccc;transform:translateY(-2px)}
-.btn.dark{background:#171717;color:white;border-color:#444}
-.btn.dark:hover{background:#303030}
-.section{padding:30px 0 48px}
-.sectionHead{
- display:flex;justify-content:space-between;align-items:center;
- gap:15px;flex-wrap:wrap;
-}
+.btn{display:inline-flex;align-items:center;justify-content:center;background:#fff;color:#080808;border:1px solid white;padding:13px 21px;border-radius:10px;font-weight:800}
+.btn:hover{background:#ccc}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.section{padding:30px 0 45px}
+.sectionHead{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
 h2{font-size:25px;margin:0 0 8px}
 .sub{color:var(--muted);font-size:13px}
-.search{
- background:#141414;border:1px solid #383838;color:white;
- border-radius:10px;padding:13px 15px;width:min(300px,100%);
- outline:none;
-}
-.search:focus,input:focus{border-color:#aaa}
+.search{background:#141414;border:1px solid #383838;color:white;border-radius:10px;padding:13px 15px;width:min(300px,100%);outline:none}
 .games{display:grid;grid-template-columns:repeat(3,1fr);gap:17px;margin-top:23px}
-.game{
- background:linear-gradient(145deg,#191919,#0d0d0d);
- border:1px solid #303030;border-radius:17px;overflow:hidden;
- transition:.22s;cursor:pointer;
-}
-.game:hover{transform:translateY(-4px);border-color:#aaa;box-shadow:0 12px 30px #fff0a}
-.gameArt{
- height:160px;display:flex;align-items:center;justify-content:center;
- background:linear-gradient(145deg,#262626,#101010);
- border-bottom:1px solid #303030;position:relative;
-}
-.gameIcon{
- width:105px;height:105px;object-fit:cover;border-radius:22px;
- border:1px solid #555;box-shadow:0 12px 30px #000;
- background:#222;
-}
+.game{background:linear-gradient(145deg,#191919,#0d0d0d);border:1px solid #303030;border-radius:17px;overflow:hidden;transition:.2s;cursor:pointer}
+.game:hover{transform:translateY(-4px);border-color:#aaa}
+.gameArt{height:155px;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#262626,#101010);border-bottom:1px solid #303030}
+.gameIcon{width:95px;height:95px;object-fit:cover;border-radius:22px;border:1px solid #555;background:#222}
 .gameInfo{padding:17px}
 .gameInfo h3{margin:0 0 7px;font-size:17px}
 .gameInfo p{margin:0;color:#999;font-size:13px}
 .gameBottom{display:flex;justify-content:space-between;align-items:center;margin-top:17px}
-.tag{
- font-size:10px;letter-spacing:1px;color:#eee;background:#252525;
- border:1px solid #444;padding:7px 9px;border-radius:6px;
-}
-.arrow{font-size:20px;color:#fff}
+.tag{font-size:10px;letter-spacing:1px;color:#eee;background:#252525;border:1px solid #444;padding:7px 9px;border-radius:6px}
 .features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
 .feature{background:#121212;border:1px solid #303030;padding:22px;border-radius:15px}
-.feature .symbol{font-size:23px;color:#ddd}
 .feature b{display:block;margin:12px 0 7px}
 .feature p{color:#999;font-size:13px;line-height:1.6;margin:0}
 footer{border-top:1px solid #303030;padding:30px 0;color:#999;font-size:13px}
 .footerRow{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .supportLink{color:#fff;text-decoration:underline;text-underline-offset:4px}
-.modal{
- display:none;position:fixed;inset:0;background:#000d;z-index:50;
- padding:16px;overflow:auto;align-items:center;justify-content:center;
-}
+.modal{display:none;position:fixed;inset:0;background:#000d;z-index:50;padding:16px;overflow:auto;align-items:center;justify-content:center}
 .modal.show{display:flex}
-.modalBox{
- width:min(560px,100%);background:#111;border:1px solid #444;
- border-radius:19px;padding:24px;position:relative;
-}
-.close{
- position:absolute;right:15px;top:15px;border:1px solid #444;
- background:#222;color:white;width:35px;height:35px;border-radius:9px;
-}
-.packageGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:18px 0}
-.package{
- text-align:left;background:#191919;border:1px solid #393939;
- color:white;padding:14px;border-radius:11px;
-}
-.package:hover,.package.selected{border-color:#fff;background:#292929}
-.package b{font-size:15px}
-.package small{display:block;color:#aaa;margin-top:7px}
-.package .price{color:#fff;font-weight:800}
+.modalBox{width:min(600px,100%);max-height:92vh;overflow:auto;background:#111;border:1px solid #444;border-radius:19px;padding:23px;position:relative}
+.close{position:absolute;right:15px;top:15px;border:1px solid #444;background:#222;color:white;width:35px;height:35px;border-radius:9px}
+.categoryTabs{display:flex;gap:8px;overflow-x:auto;padding:12px 0}
+.categoryTab{white-space:nowrap;border:1px solid #444;background:#191919;color:#ddd;padding:9px 13px;border-radius:20px;font-size:12px}
+.categoryTab.active{background:white;color:#080808;border-color:white}
+.packageGrid{display:grid;grid-template-columns:1fr;gap:11px;margin:12px 0 18px}
+.package{width:100%;min-height:91px;display:flex;align-items:center;gap:13px;text-align:left;color:white;padding:11px;border:1px solid #444;border-radius:14px;transition:.2s;overflow:hidden}
+.package:hover{filter:brightness(1.15);border-color:#ddd}
+.package.selected{border:2px solid white;box-shadow:0 0 16px #ffffff25}
+.packageArt{width:65px;height:65px;flex-shrink:0;border-radius:12px;display:flex;align-items:center;justify-content:center;border:1px solid #ffffff35;background:#111}
+.packageArt img{width:100%;height:100%;object-fit:cover;border-radius:11px}
+.packageDetails{flex:1;min-width:0}
+.packageDetails b{font-size:14px;display:block}
+.packageDetails small{display:block;color:#ddd;margin-top:6px;font-size:11px}
+.package .price{display:block;margin-top:7px;font-size:14px;font-weight:900;color:white}
+.packageArrow{color:#ddd;font-size:19px}
+.unavailable{opacity:.72;cursor:not-allowed}
 .field{margin:13px 0}
 .field label{display:block;color:#ccc;font-size:13px;margin-bottom:7px}
-.field input{
- width:100%;background:#090909;color:#fff;border:1px solid #383838;
- border-radius:10px;padding:13px;outline:none;
-}
+.field input{width:100%;background:#090909;color:#fff;border:1px solid #383838;border-radius:10px;padding:13px;outline:none}
 .notice{font-size:11px;color:#999;line-height:1.6}
-.status{
- padding:12px;border-radius:9px;background:#252525;color:#eee;
- font-size:13px;margin-top:12px;overflow-wrap:anywhere;
-}
+.status{padding:12px;border-radius:9px;background:#252525;color:#eee;font-size:13px;margin-top:12px;overflow-wrap:anywhere}
 .orders{display:none;margin-top:18px}
 .orderItem{padding:15px;border:1px solid #333;border-radius:11px;margin:10px 0;background:#131313}
 .orderItem p{color:#aaa;font-size:12px;overflow-wrap:anywhere}
-.adminNote{font-size:11px;color:#888;margin-top:10px}
-@media(max-width:800px){
- .games{grid-template-columns:repeat(2,1fr)}
- .navlinks{display:none}
- .heroBox{padding:30px}
- .features{grid-template-columns:1fr}
-}
-@media(max-width:480px){
- .games{grid-template-columns:1fr}
- .hero{padding-top:30px}
- .heroBox{padding:25px 20px}
- .logo{font-size:16px}
- .packageGrid{grid-template-columns:1fr 1fr}
-}
+@media(max-width:800px){.games{grid-template-columns:repeat(2,1fr)}.navlinks{display:none}.heroBox{padding:30px}.features{grid-template-columns:1fr}}
+@media(max-width:480px){.games{grid-template-columns:1fr}.hero{padding-top:25px}.heroBox{padding:25px 20px}.logo{font-size:15px}.modalBox{padding:18px}.packageArt{width:57px;height:57px}}
 </style>
 </head>
 <body>
@@ -183,16 +99,11 @@ footer{border-top:1px solid #303030;padding:30px 0;color:#999;font-size:13px}
    <a href="#orders">Buyurtmalar</a>
    <a href="#support">Support</a>
   </nav>
-  <div class="controls">
-   <select id="language" aria-label="Language">
-    <option value="uz">UZ</option>
-    <option value="en">EN</option>
-    <option value="ru">RU</option>
-    <option value="tr">TR</option>
-    <option value="es">ES</option>
-    <option value="ar">AR</option>
-   </select>
-  </div>
+  <select id="language" aria-label="Language">
+   <option value="uz">UZ</option><option value="en">EN</option>
+   <option value="ru">RU</option><option value="tr">TR</option>
+   <option value="es">ES</option><option value="ar">AR</option>
+  </select>
  </div>
 </header>
 
@@ -201,17 +112,14 @@ footer{border-top:1px solid #303030;padding:30px 0;color:#999;font-size:13px}
  <div class="heroBox">
   <div class="eyebrow">GAMING DIGITAL MARKETPLACE</div>
   <h1>YOUR GAME.<br>YOUR LEVEL.</h1>
-  <p>Sevimli o‘yinlaringiz uchun paketlarni tanlang. Buyurtma jarayonini bitta platformada boshqaring.</p>
+  <p>Sevimli o‘yinlaringiz uchun raqamli paketlar, vaucherlar va obunalarni bitta platformadan toping.</p>
   <div><a class="btn" href="#games">Katalogni ko‘rish ↗</a></div>
  </div>
 </section>
 
 <section class="section container" id="games">
  <div class="sectionHead">
-  <div>
-   <h2>O‘yinlar katalogi</h2>
-   <div class="sub">O‘yinni tanlang va mavjud paketlarni ko‘ring.</div>
-  </div>
+  <div><h2>O‘yinlar katalogi</h2><div class="sub">O‘yinni tanlang va mavjud paketlarni ko‘ring.</div></div>
   <input class="search" id="search" placeholder="O‘yin qidirish...">
  </div>
  <div class="games" id="gameList"></div>
@@ -221,21 +129,9 @@ footer{border-top:1px solid #303030;padding:30px 0;color:#999;font-size:13px}
  <h2>Bizning xizmatlar</h2>
  <div class="sub">TOP UP SERVICE — ALL GAMES</div>
  <div class="features">
-  <div class="feature">
-   <div class="symbol">◈</div>
-   <b>O‘yinlar katalogi</b>
-   <p>Turli o‘yinlar uchun paketlar bitta joyda.</p>
-  </div>
-  <div class="feature">
-   <div class="symbol">◎</div>
-   <b>Buyurtma kuzatuvi</b>
-   <p>Buyurtma raqami va yuborilgan buyurtmalar tarixini ko‘ring.</p>
-  </div>
-  <div class="feature">
-   <div class="symbol">◇</div>
-   <b>Support xizmati</b>
-   <p>Savollar va yordam uchun Telegram orqali bog‘laning.</p>
-  </div>
+  <div class="feature"><div>◈</div><b>Keng katalog</b><p>Olmos, UC, vaucher, obuna va Battle Pass mahsulotlari.</p></div>
+  <div class="feature"><div>◎</div><b>Buyurtma tarixi</b><p>Ushbu qurilmadan yuborilgan demo buyurtmalarni ko‘ring.</p></div>
+  <div class="feature"><div>◇</div><b>Support xizmati</b><p>Savollar va yordam uchun Telegram orqali bog‘laning.</p></div>
  </div>
 </section>
 
@@ -248,154 +144,271 @@ footer{border-top:1px solid #303030;padding:30px 0;color:#999;font-size:13px}
 
 <footer id="support">
  <div class="container footerRow">
-  <div>
-   <div class="logo">TOP UP SERVICE <span>— ALL GAMES</span></div>
-   <p>© 2026 All rights reserved.</p>
-  </div>
-  <div>
-   <b style="color:#fff">SUPPORT</b>
-   <p>Yordam kerakmi? Biz bilan bog‘laning.</p>
-   <a class="supportLink" href="https://t.me/Jorabekovich09" target="_blank" rel="noopener noreferrer">Telegram Support ↗</a>
-  </div>
-  <div>
-   <b style="color:#fff">INFORMATION</b>
-   <p>Buyurtmalar demo rejimida qabul qilinadi.</p>
-  </div>
+  <div><div class="logo">TOP UP SERVICE <span>— ALL GAMES</span></div><p>© 2026 All rights reserved.</p></div>
+  <div><b style="color:white">SUPPORT</b><p>Yordam kerakmi? Biz bilan bog‘laning.</p><a class="supportLink" href="https://t.me/Jorabekovich09" target="_blank" rel="noopener noreferrer">Telegram Support ↗</a></div>
+  <div><b style="color:white">INFORMATION</b><p>Buyurtmalar demo rejimida qabul qilinadi.</p></div>
  </div>
 </footer>
 
 <div class="modal" id="gameModal">
  <div class="modalBox">
   <button class="close" onclick="closeModal()">✕</button>
-  <div class="eyebrow">GAME PACKAGE</div>
+  <div class="eyebrow">GAME PACKAGE STORE</div>
   <h2 id="modalTitle" style="margin-top:14px">Game</h2>
-  <p class="sub">Kerakli paketni tanlang.</p>
+  <p class="sub">Mahsulot turini tanlang.</p>
+  <div class="categoryTabs" id="categoryTabs"></div>
   <div class="packageGrid" id="packageList"></div>
-  <div class="field">
-   <label>Player ID</label>
-   <input id="playerId" placeholder="O‘yin ID raqamingiz">
-  </div>
-  <div class="field">
-   <label>Server / Region (agar kerak bo‘lsa)</label>
-   <input id="serverId" placeholder="Server (ixtiyoriy)">
-  </div>
-  <div class="field">
-   <label>Email (ixtiyoriy)</label>
-   <input id="email" type="email" placeholder="example@email.com">
-  </div>
-  <button class="btn" style="width:100%" id="submitOrder" onclick="submitOrder()">Demo buyurtma yuborish</button>
+  <div class="field"><label>Player ID</label><input id="playerId" placeholder="O‘yin ID raqamingiz"></div>
+  <div class="field"><label>Server / Region (agar kerak bo‘lsa)</label><input id="serverId" placeholder="Server (ixtiyoriy)"></div>
+  <div class="field"><label>Email (ixtiyoriy)</label><input id="email" type="email" placeholder="example@email.com"></div>
+  <button class="btn" style="width:100%" id="submitOrder" onclick="submitOrder()" disabled>Avval narxli paketni tanlang</button>
   <div id="formMessage"></div>
-  <p class="notice">Bu demo buyurtma shakli. Hozircha haqiqiy to‘lov va avtomatik yetkazib berish mavjud emas. O‘yin akkauntingiz parolini hech qachon kiritmang.</p>
+  <p class="notice">Demo buyurtma shakli. Hozircha haqiqiy to‘lov va avtomatik yetkazib berish mavjud emas. O‘yin akkauntingiz parolini hech qachon kiritmang. Mahsulotlar hududga qarab farq qilishi mumkin.</p>
  </div>
 </div>
 
 <script>
-/* SUPABASE — PUBLIC CLIENT KEY ONLY */
 const SUPABASE_URL="https://xdfwhzhhrnapqldfrbsr.supabase.co";
 const SUPABASE_KEY="sb_publishable_dibm89IcPFuf1o1nEy2faQ_jnqAyXga";
 const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 
-/*
-  Narxlar — oldingi taklifga 10% qo‘shilgan va
-  mijozga ko‘rinishi uchun yaxlitlangan.
-  Bu narxlar tannarx bilan hali tekshirilmagan.
-*/
 const games=[
- {id:"freefire",name:"Free Fire",type:"Diamonds",
-  icon:"https://www.google.com/s2/favicons?domain=ff.garena.com&sz=128",
-  packages:[
-   [100,12000],[310,36500],[520,59500],
-   [1060,115500],[2180,236500],[5600,577500]
+{
+ id:"freefire",name:"Free Fire",type:"Diamonds",
+ icon:"https://www.google.com/s2/favicons?domain=ff.garena.com&sz=128",
+ categories:[
+  {name:"Diamonds",items:[
+   ["100 Diamonds",12000],["310 Diamonds",36500],["520 Diamonds",59500],
+   ["1060 Diamonds",115500],["2180 Diamonds",236500],["5600 Diamonds",577500]
   ]},
- {id:"pubg",name:"PUBG Mobile",type:"UC",
-  icon:"https://www.google.com/s2/favicons?domain=pubgmobile.com&sz=128",
-  packages:[
-   [60,13750],[325,65000],[660,127500],
-   [1800,315500],[3850,624000],[8100,1245000]
+  {name:"Membership",items:[
+   ["Weekly Lite",null],["Weekly Membership",null],["Monthly Membership",null]
   ]},
- {id:"codm",name:"Call of Duty Mobile",type:"CP",
-  icon:"https://www.google.com/s2/favicons?domain=callofduty.com&sz=128",
-  packages:[
-   [80,15000],[420,77000],[880,148500],
-   [2400,373000],[5000,709500]
+  {name:"Evo Access",items:[
+   ["Evo Access — 3 kun",null],["Evo Access — 7 kun",null],["Evo Access — 30 kun",null]
   ]},
- {id:"ml",name:"Mobile Legends",type:"Diamonds",
-  icon:"https://www.google.com/s2/favicons?domain=mobilelegends.com&sz=128",
-  packages:[
-   [86,18500],[172,36500],[257,52000],
-   [706,145000],[1412,275000]
+  {name:"Level Up",items:[
+   ["Level Up 6",null],["Level Up 10",null],["Level Up 15",null],
+   ["Level Up 20",null],["Level Up 25",null],["Level Up 30",null]
   ]},
- {id:"genshin",name:"Genshin Impact",type:"Genesis Crystals",
-  icon:"https://www.google.com/s2/favicons?domain=genshin.hoyoverse.com&sz=128",
-  packages:[
-   [60,14500],[300,47500],[980,159500],
-   [1980,313500],[3280,511500]
-  ]},
- {id:"valorant",name:"Valorant",type:"VP",
-  icon:"https://www.google.com/s2/favicons?domain=playvalorant.com&sz=128",
-  packages:[
-   [475,88000],[1000,181500],[2050,363000],
-   [3650,632500],[5350,913000]
+  {name:"Booyah Pass",items:[
+   ["Booyah Pass",null],["Booyah Pass Premium Plus",null]
   ]}
+ ]
+},
+{
+ id:"pubg",name:"PUBG Mobile",type:"UC",
+ icon:"https://www.google.com/s2/favicons?domain=pubgmobile.com&sz=128",
+ categories:[
+  {name:"UC",items:[
+   ["60 UC",13750],["325 UC",65000],["660 UC",127500],
+   ["1800 UC",315500],["3850 UC",624000],["8100 UC",1245000]
+  ]},
+  {name:"Membership",items:[
+   ["Prime",null],["Prime Plus",null]
+  ]},
+  {name:"Royale Pass",items:[
+   ["Royale Pass",null],["Elite Pass",null],["Elite Pass Plus",null]
+  ]},
+  {name:"Special",items:[
+   ["UC Voucher",null],["Special UC Bundle",null],["Event Bundle",null]
+  ]}
+ ]
+},
+{
+ id:"codm",name:"Call of Duty Mobile",type:"CP",
+ icon:"https://www.google.com/s2/favicons?domain=callofduty.com&sz=128",
+ categories:[
+  {name:"CP",items:[
+   ["80 CP",15000],["420 CP",77000],["880 CP",148500],
+   ["2400 CP",373000],["5000 CP",709500]
+  ]},
+  {name:"Battle Pass",items:[
+   ["Battle Pass",null],["Battle Pass Bundle",null]
+  ]},
+  {name:"Special",items:[
+   ["CP Special Bundle",null],["Vault Edition",null]
+  ]}
+ ]
+},
+{
+ id:"ml",name:"Mobile Legends",type:"Diamonds",
+ icon:"https://www.google.com/s2/favicons?domain=mobilelegends.com&sz=128",
+ categories:[
+  {name:"Diamonds",items:[
+   ["86 Diamonds",18500],["172 Diamonds",36500],["257 Diamonds",52000],
+   ["706 Diamonds",145000],["1412 Diamonds",275000]
+  ]},
+  {name:"Weekly Pass",items:[
+   ["Weekly Diamond Pass",null],["Weekly Elite Pack",null]
+  ]},
+  {name:"Passes",items:[
+   ["Twilight Pass",null],["Starlight Membership",null],
+   ["Starlight Plus",null]
+  ]}
+ ]
+},
+{
+ id:"genshin",name:"Genshin Impact",type:"Genesis Crystals",
+ icon:"https://www.google.com/s2/favicons?domain=genshin.hoyoverse.com&sz=128",
+ categories:[
+  {name:"Crystals",items:[
+   ["60 Crystals",14500],["300 Crystals",47500],["980 Crystals",159500],
+   ["1980 Crystals",313500],["3280 Crystals",511500]
+  ]},
+  {name:"Blessing",items:[
+   ["Blessing of the Welkin Moon",null]
+  ]},
+  {name:"Battle Pass",items:[
+   ["Gnostic Hymn",null],["Gnostic Chorus",null]
+  ]}
+ ]
+},
+{
+ id:"valorant",name:"Valorant",type:"VP",
+ icon:"https://www.google.com/s2/favicons?domain=playvalorant.com&sz=128",
+ categories:[
+  {name:"VP",items:[
+   ["475 VP",88000],["1000 VP",181500],["2050 VP",363000],
+   ["3650 VP",632500],["5350 VP",913000]
+  ]},
+  {name:"Battle Pass",items:[
+   ["Battle Pass",null]
+  ]},
+  {name:"Gift Cards",items:[
+   ["Valorant Gift Card",null],["VP Digital Code",null]
+  ]}
+ ]
+}
 ];
 
 let selectedGame=null;
 let selectedPackage=null;
+let activeCategory=0;
 const $=id=>document.getElementById(id);
-const money=n=>n.toLocaleString("uz-UZ")+" so‘m";
+const money=n=>Number(n).toLocaleString("uz-UZ")+" so‘m";
 
 function renderGames(filter=""){
  $("gameList").innerHTML="";
- games.filter(g=>g.name.toLowerCase().includes(filter.toLowerCase()))
- .forEach(g=>{
+ games.filter(g=>g.name.toLowerCase().includes(filter.toLowerCase())).forEach(g=>{
   const card=document.createElement("article");
   card.className="game";
   card.innerHTML=`
-   <div class="gameArt">
-    <img class="gameIcon" src="${g.icon}" alt="${g.name} icon"
-      loading="lazy" referrerpolicy="no-referrer">
-   </div>
+   <div class="gameArt"><img class="gameIcon" src="${g.icon}" alt="${g.name}" loading="lazy"></div>
    <div class="gameInfo">
-    <h3>${g.name}</h3>
-    <p>${g.type}</p>
-    <div class="gameBottom">
-     <span class="tag">AVAILABLE PACKAGES</span>
-     <span class="arrow">↗</span>
-    </div>
+    <h3>${g.name}</h3><p>${g.categories.length} ta mahsulot kategoriyasi</p>
+    <div class="gameBottom"><span class="tag">KATALOGNI OCHISH</span><span>↗</span></div>
    </div>`;
   card.addEventListener("click",()=>openGame(g.id));
   $("gameList").appendChild(card);
  });
 }
 
+function svgPackageImage(gameId,index){
+ const palettes=[
+  ["#182d46","#58aaff","◆"],["#35251c","#ffb35c","★"],
+  ["#292044","#c4a5ff","✦"],["#16352e","#72e2ae","♛"],
+  ["#42232c","#ff8ba3","♦"],["#333333","#eeeeee","✧"],
+  ["#26354b","#9ac7ff","⬡"],["#40331b","#f5d477","✪"]
+ ];
+ const p=palettes[(index+games.findIndex(g=>g.id===gameId))%palettes.length];
+ const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 140 140">
+ <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${p[1]}"/><stop offset="1" stop-color="${p[0]}"/></linearGradient></defs>
+ <rect width="140" height="140" rx="20" fill="${p[0]}"/>
+ <circle cx="70" cy="70" r="53" fill="url(#g)" opacity=".4"/>
+ <circle cx="70" cy="70" r="39" fill="none" stroke="${p[1]}" stroke-width="2"/>
+ <text x="70" y="84" text-anchor="middle" font-size="43" fill="${p[1]}">${p[2]}</text>
+ <path d="M15 110H125" stroke="${p[1]}" opacity=".5"/></svg>`;
+ return "data:image/svg+xml;charset=UTF-8,"+encodeURIComponent(svg);
+}
+
 function openGame(id){
  selectedGame=games.find(g=>g.id===id);
  selectedPackage=null;
+ activeCategory=0;
  $("modalTitle").textContent=selectedGame.name;
- $("packageList").innerHTML="";
- $("formMessage").innerHTML="";
  $("playerId").value="";
  $("serverId").value="";
  $("email").value="";
- selectedGame.packages.forEach(([amount,price])=>{
-  const btn=document.createElement("button");
-  btn.className="package";
-  btn.innerHTML=`
-   <b>${amount.toLocaleString("uz-UZ")} ${selectedGame.type}</b>
-   <small class="price">${money(price)}</small>`;
-  btn.onclick=()=>{
-   selectedPackage={amount,price};
-   document.querySelectorAll(".package").forEach(x=>x.classList.remove("selected"));
-   btn.classList.add("selected");
-  };
-  $("packageList").appendChild(btn);
- });
+ $("formMessage").innerHTML="";
  $("gameModal").classList.add("show");
+ renderCategories();
+ renderPackages();
+ updateSubmitButton();
 }
+
+function renderCategories(){
+ const box=$("categoryTabs");
+ box.innerHTML="";
+ selectedGame.categories.forEach((cat,index)=>{
+  const btn=document.createElement("button");
+  btn.className="categoryTab"+(index===activeCategory?" active":"");
+  btn.textContent=cat.name;
+  btn.onclick=()=>{
+   activeCategory=index;
+   selectedPackage=null;
+   renderCategories();
+   renderPackages();
+   updateSubmitButton();
+  };
+  box.appendChild(btn);
+ });
+}
+
+function renderPackages(){
+ const box=$("packageList");
+ box.innerHTML="";
+ const category=selectedGame.categories[activeCategory];
+ category.items.forEach((item,index)=>{
+  const [name,price]=item;
+  const available=Number.isFinite(price);
+  const btn=document.createElement("button");
+  btn.className="package"+(!available?" unavailable":"");
+  btn.style.background=packageBackground(selectedGame.id,index);
+  btn.disabled=!available;
+  const img=svgPackageImage(selectedGame.id,index);
+  btn.innerHTML=`
+   <div class="packageArt"><img src="${img}" alt="Paket rasmi"></div>
+   <div class="packageDetails">
+    <b>${name}</b>
+    <small>${selectedGame.name} • ${category.name}</small>
+    <span class="price">${available?money(price):"Narx tez orada"}</span>
+   </div>
+   <span class="packageArrow">${available?"↗":"—"}</span>`;
+  if(available){
+   btn.onclick=()=>{
+    selectedPackage={name,price,category:category.name};
+    document.querySelectorAll(".package").forEach(x=>x.classList.remove("selected"));
+    btn.classList.add("selected");
+    updateSubmitButton();
+   };
+  }
+  box.appendChild(btn);
+ });
+}
+
+function packageBackground(gameId,index){
+ const colors={
+  freefire:["#172f49","#38271b","#253b2c","#3b2430","#343434"],
+  pubg:["#49311d","#27394b","#3b2b20","#303030"],
+  codm:["#382323","#273a32","#37302a"],
+  ml:["#28254b","#193d42","#473027"],
+  genshin:["#23384a","#3c2b48","#403520"],
+  valorant:["#47252d","#282d3e","#3b3024"]
+ };
+ const list=colors[gameId]||["#252525"];
+ const color=list[index%list.length];
+ return `linear-gradient(115deg,${color},#101010 90%)`;
+}
+
+function updateSubmitButton(){
+ const btn=$("submitOrder");
+ btn.disabled=!selectedPackage;
+ btn.textContent=selectedPackage?"Demo buyurtma yuborish":"Avval narxli paketni tanlang";
+}
+
 function closeModal(){$("gameModal").classList.remove("show")}
-$("gameModal").addEventListener("click",e=>{
- if(e.target===$("gameModal"))closeModal();
-});
+$("gameModal").addEventListener("click",e=>{if(e.target===$("gameModal"))closeModal()});
 
 function showMessage(message){
  $("formMessage").innerHTML="";
@@ -416,23 +429,15 @@ async function submitOrder(){
  const serverId=$("serverId").value.trim();
  const email=$("email").value.trim();
 
- if(!selectedGame||!selectedPackage){
-  showMessage("Avval paketni tanlang.");return;
- }
- if(playerId.length<3){
-  showMessage("Player ID ni to‘g‘ri kiriting.");return;
- }
- if(email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-  showMessage("Email manzilini tekshiring.");return;
- }
+ if(!selectedGame||!selectedPackage){showMessage("Avval narxi mavjud paketni tanlang.");return}
+ if(playerId.length<3){showMessage("Player ID ni to‘g‘ri kiriting.");return}
+ if(email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showMessage("Email manzilini tekshiring.");return}
 
  const btn=$("submitOrder");
  btn.disabled=true;
  btn.textContent="Yuborilmoqda...";
 
- const packageName=
-  selectedPackage.amount+" "+selectedGame.type+
-  " — "+selectedPackage.price+" UZS";
+ const packageName=selectedPackage.name+" — "+selectedPackage.price+" UZS";
 
  try{
   const {data,error}=await db.from("demo_orders").insert({
@@ -445,12 +450,8 @@ async function submitOrder(){
   if(error)throw error;
 
   const order={
-   id:data.id,
-   game:selectedGame.name,
-   pack:packageName,
-   player:playerId,
-   server:serverId,
-   date:new Date().toLocaleString()
+   id:data.id,game:selectedGame.name,pack:packageName,
+   player:playerId,server:serverId,date:new Date().toLocaleString()
   };
   saveLocalOrder(order);
   showMessage("Demo buyurtma yuborildi. Buyurtma raqami: "+data.id);
@@ -459,8 +460,7 @@ async function submitOrder(){
   console.error(error);
   showMessage("Buyurtma yuborilmadi. Internet yoki Supabase sozlamalarini tekshiring.");
  }finally{
-  btn.disabled=false;
-  btn.textContent="Demo buyurtma yuborish";
+  updateSubmitButton();
  }
 }
 
@@ -469,10 +469,7 @@ function renderOrderHistory(){
  const box=$("orderHistoryList");
  box.innerHTML="";
  box.style.display="block";
- if(!list.length){
-  box.textContent="Hozircha buyurtmalar yo‘q.";
-  return;
- }
+ if(!list.length){box.textContent="Hozircha buyurtmalar yo‘q.";return}
  list.forEach(o=>{
   const item=document.createElement("div");
   item.className="orderItem";
@@ -491,19 +488,18 @@ function renderOrderHistory(){
 $("search").addEventListener("input",e=>renderGames(e.target.value));
 
 const translations={
- uz:{games:"O‘yinlar",features:"Xizmatlar",orders:"Buyurtmalar",support:"Yordam"},
- en:{games:"Games",features:"Services",orders:"Orders",support:"Support"},
- ru:{games:"Игры",features:"Услуги",orders:"Заказы",support:"Поддержка"},
- tr:{games:"Oyunlar",features:"Hizmetler",orders:"Siparişler",support:"Destek"},
- es:{games:"Juegos",features:"Servicios",orders:"Pedidos",support:"Soporte"},
- ar:{games:"الألعاب",features:"الخدمات",orders:"الطلبات",support:"الدعم"}
+ uz:["O‘yinlar","Xizmatlar","Buyurtmalar","Support"],
+ en:["Games","Services","Orders","Support"],
+ ru:["Игры","Услуги","Заказы","Поддержка"],
+ tr:["Oyunlar","Hizmetler","Siparişler","Destek"],
+ es:["Juegos","Servicios","Pedidos","Soporte"],
+ ar:["الألعاب","الخدمات","الطلبات","الدعم"]
 };
 $("language").addEventListener("change",()=>{
- const lang=translations[$("language").value];
- document.querySelectorAll(".navlinks a").forEach((el,i)=>{
-  el.textContent=[lang.games,lang.features,lang.orders,lang.support][i];
- });
- document.documentElement.dir=$("language").value==="ar"?"rtl":"ltr";
+ const lang=$("language").value;
+ document.querySelectorAll(".navlinks a").forEach((el,i)=>el.textContent=translations[lang][i]);
+ document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+ document.documentElement.lang=lang;
 });
 
 renderGames();
@@ -511,4 +507,3 @@ renderOrderHistory();
 </script>
 </body>
 </html>
- 
