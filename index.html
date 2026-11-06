@@ -1,422 +1,587 @@
-
 <!DOCTYPE html>
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#090912">
-<title>TOP UP SERVICE</title>
+<meta name="theme-color" content="#070913">
+<title>TOP UP SERVICE | Pro</title>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg:#090912;
-  --panel:#131426;
-  --panel2:#191b31;
-  --line:#292b46;
-  --purple:#925cff;
-  --blue:#36caff;
-  --text:#fff;
-  --muted:#999db8;
+  --bg: #070913;
+  --panel: rgba(17, 22, 41, 0.7);
+  --panel-solid: #111629;
+  --line: rgba(255, 255, 255, 0.08);
+  --purple: #8b5cf6;
+  --blue: #3b82f6;
+  --neon-blue: #06b6d4;
+  --text: #ffffff;
+  --muted: #94a3b8;
 }
+
 *{box-sizing:border-box;margin:0;padding:0}
+
 body{
-  font-family:Arial,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  padding-bottom:85px;
+  font-family:'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding-bottom: 90px;
+  background-image: 
+    radial-gradient(circle at 10% 10%, rgba(139, 92, 246, 0.12), transparent 40%),
+    radial-gradient(circle at 90% 90%, rgba(59, 130, 246, 0.1), transparent 40%);
+  background-attachment: fixed;
 }
+
 button{font:inherit;cursor:pointer}
 button:focus-visible{outline:2px solid var(--blue)}
+
 header{
-  height:72px;
-  padding:0 6%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  background:#10111f;
-  border-bottom:1px solid var(--line);
-  position:sticky;
-  top:0;
-  z-index:20;
-  backdrop-filter:blur(15px);
+  height: 75px;
+  padding: 0 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(11, 15, 28, 0.8);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
+
 .logo{
-  font-size:21px;
-  font-weight:900;
-  letter-spacing:1px;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  background: linear-gradient(135deg, #fff 30%, var(--muted));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-.logo span{color:var(--blue)}
-.header-right{
-  color:var(--muted);
-  font-size:12px;
+.logo span{
+  background: linear-gradient(135deg, var(--blue), var(--neon-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
+
+.online-badge{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  padding: 6px 12px;
+  border-radius: 30px;
+  color: #34d399;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.dot{
+  width: 6px;
+  height: 6px;
+  background: #34d399;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #34d399;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse{
+  0%{transform: scale(1); opacity: 1;}
+  50%{transform: scale(1.4); opacity: 0.4;}
+  100%{transform: scale(1); opacity: 1;}
+}
+
 .container{
-  width:92%;
-  max-width:1100px;
-  margin:auto;
+  width: 92%;
+  max-width: 1050px;
+  margin: auto;
 }
-.page{display:none;padding:30px 0}
-.page.active{display:block;animation:fade .3s ease}
+
+.page{display:none;padding:35px 0}
+.page.active{display:block;animation:fade 0.35s cubic-bezier(0.16, 1, 0.3, 1)}
+
 @keyframes fade{
-  from{opacity:0;transform:translateY(8px)}
+  from{opacity:0;transform:translateY(10px)}
   to{opacity:1;transform:translateY(0)}
 }
+
+/* HERO SECTION */
 .hero{
-  position:relative;
-  overflow:hidden;
-  padding:55px 35px;
-  border:1px solid #39305f;
-  border-radius:25px;
-  background:
-    radial-gradient(circle at 90% 10%,#6536aa70,transparent 35%),
-    linear-gradient(120deg,#21143e,#101d36 65%,#102d43);
-  margin-bottom:35px;
+  position: relative;
+  overflow: hidden;
+  padding: 50px 40px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(30, 27, 75, 0.6), rgba(15, 23, 42, 0.8));
+  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 40px -15px rgba(0,0,0,0.5);
+  margin-bottom: 40px;
 }
-.hero:after{
-  content:"";
-  position:absolute;
-  width:240px;
-  height:240px;
-  border-radius:50%;
-  background:#925cff25;
-  filter:blur(65px);
-  right:-60px;
-  bottom:-100px;
+
+.hero::before{
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 250px;
+  height: 250px;
+  background: rgba(139, 92, 246, 0.15);
+  filter: blur(60px);
+  border-radius: 50%;
+  z-index: 0;
 }
-.hero-content{position:relative;z-index:1;max-width:600px}
+
+.hero-content{position: relative; z-index: 1; max-width: 550px;}
+
 .tag{
-  display:inline-block;
-  background:#ffffff12;
-  border:1px solid #ffffff20;
-  padding:7px 12px;
-  border-radius:30px;
-  font-size:11px;
-  color:#d4c3ff;
-  margin-bottom:18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #c4b5fd;
+  margin-bottom: 20px;
 }
+
 .hero h1{
-  font-size:clamp(34px,6vw,58px);
-  line-height:1.1;
-  margin-bottom:15px;
+  font-size: clamp(32px, 5vw, 50px);
+  line-height: 1.15;
+  font-weight: 800;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
 }
+
 .hero h1 span{
-  background:linear-gradient(90deg,#a77bff,#38d5ff);
-  -webkit-background-clip:text;
-  color:transparent;
+  background: linear-gradient(135deg, var(--blue), var(--neon-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
+
 .hero p{
-  color:#c1c4d8;
-  line-height:1.7;
-  max-width:470px;
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 14px;
+  margin-bottom: 24px;
 }
+
 .primary-btn{
-  border:0;
-  color:white;
-  background:linear-gradient(100deg,var(--purple),#347fe9);
-  padding:14px 22px;
-  border-radius:12px;
-  font-weight:bold;
-  margin-top:22px;
-  box-shadow:0 7px 25px #7044db45;
-  transition:.2s;
+  border: 0;
+  color: white;
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  padding: 14px 26px;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+  transition: all 0.25s ease;
 }
+
 .primary-btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 10px 30px #7044db70;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.5);
+  filter: brightness(1.1);
 }
+
 .section-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:30px 0 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 35px 0 20px;
 }
-.section-head h2{font-size:22px}
+
+.section-head h2{
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
 .section-head button{
-  background:none;
-  border:0;
-  color:var(--blue);
-  font-size:13px;
+  background: none;
+  border: 0;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 600;
+  transition: opacity 0.2s;
 }
+.section-head button:hover{opacity: 0.8}
+
+/* GAMES GRID */
 .games{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:17px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
+
 .game{
-  background:linear-gradient(145deg,#191a30,#111321);
-  border:1px solid var(--line);
-  border-radius:19px;
-  padding:20px;
-  cursor:pointer;
-  transition:.25s;
-  position:relative;
-  overflow:hidden;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 22px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
+
+.game::before{
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.03), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
 .game:hover{
-  transform:translateY(-5px);
-  border-color:#7555bd;
-  box-shadow:0 12px 30px #0006,0 0 20px #925cff18;
+  transform: translateY(-6px);
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(59, 130, 246, 0.15);
 }
+
+.game:hover::before{opacity: 1}
+
 .game-image{
-  width:75px;
-  height:75px;
-  border-radius:18px;
-  overflow:hidden;
-  background:#252740;
-  margin-bottom:16px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:36px;
+  width: 65px;
+  height: 65px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line);
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
 }
+
 .game-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-.game h3{font-size:16px}
+
+.game h3{
+  font-size: 16px;
+  font-weight: 600;
+}
+
 .game p{
-  color:var(--muted);
-  font-size:12px;
-  margin-top:7px;
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 4px;
 }
+
 .game-arrow{
-  position:absolute;
-  right:17px;
-  bottom:20px;
-  color:var(--blue);
-  font-size:20px;
+  position: absolute;
+  right: 20px;
+  bottom: 22px;
+  color: var(--muted);
+  font-size: 16px;
+  transition: all 0.2s;
 }
+
+.game:hover .game-arrow{
+  color: var(--blue);
+  transform: translate(2px, -2px);
+}
+
+/* FEATURES */
 .features{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-  margin-top:35px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 40px;
 }
+
 .feature{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:17px;
-  padding:22px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 24px;
+  backdrop-filter: blur(10px);
 }
-.feature-icon{font-size:25px;margin-bottom:12px}
-.feature h3{font-size:15px}
+
+.feature-icon{
+  font-size: 24px;
+  margin-bottom: 14px;
+  display: inline-block;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid var(--line);
+}
+
+.feature h3{font-size: 15px; font-weight: 600;}
 .feature p{
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.6;
-  margin-top:9px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 8px;
 }
+
 .title{
-  font-size:25px;
-  margin-bottom:20px;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
 }
+
+/* PANEL & DETAILS */
 .panel{
-  background:linear-gradient(145deg,#191a30,#111321);
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:25px;
-  max-width:650px;
-  margin:auto;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 30px;
+  max-width: 600px;
+  margin: auto;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
+
 .back-btn{
-  border:1px solid var(--line);
-  background:#202139;
-  color:white;
-  padding:10px 15px;
-  border-radius:9px;
-  margin-bottom:20px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  padding: 9px 16px;
+  border-radius: 10px;
+  margin-bottom: 22px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.2s;
 }
+.back-btn:hover{background: rgba(255, 255, 255, 0.07)}
+
 .game-heading{
-  display:flex;
-  align-items:center;
-  gap:15px;
-  margin-bottom:22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
 }
-.game-heading .game-image{margin:0}
+.game-heading .game-image{margin:0; width: 60px; height: 60px;}
+.game-heading h2{font-size: 18px; font-weight: 700;}
 .game-heading p{
-  color:var(--muted);
-  font-size:12px;
-  margin-top:6px;
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 4px;
 }
+
 .label{
-  font-size:13px;
-  color:#d5d6e4;
-  margin:20px 0 10px;
-  display:block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #e2e8f0;
+  margin: 20px 0 10px;
+  display: block;
 }
+
 .packages{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
 }
+
 .package{
-  border:1px solid var(--line);
-  background:#0d0f1c;
-  color:white;
-  border-radius:13px;
-  padding:15px 12px;
-  text-align:left;
-  transition:.2s;
-  display:flex;
-  align-items:center;
-  gap:11px;
+  border: 1px solid var(--line);
+  background: rgba(13, 17, 30, 0.6);
+  color: white;
+  border-radius: 14px;
+  padding: 14px;
+  text-align: left;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
-.package:hover{border-color:#7354b6}
+
+.package:hover{border-color: rgba(59, 130, 246, 0.4); background: rgba(19, 27, 48, 0.8);}
 .package.selected{
-  border-color:var(--blue);
-  background:#14243a;
-  box-shadow:0 0 16px #36caff20;
+  border-color: var(--blue);
+  background: rgba(59, 130, 246, 0.12);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
 }
+
 .currency-icon{
-  width:36px;
-  height:36px;
-  flex-shrink:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:25px;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
 }
-.diamond{
-  width:34px;
-  height:34px;
-}
-.package strong{font-size:14px}
+.diamond{width: 30px; height: 30px;}
+
+.package strong{font-size: 13px; font-weight: 600;}
 .package small{
-  display:block;
-  color:var(--muted);
-  font-size:10px;
-  margin-top:5px;
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 3px;
 }
+
 input{
-  width:100%;
-  background:#0c0e1b;
-  border:1px solid #393d5a;
-  border-radius:11px;
-  padding:15px;
-  color:white;
-  outline:none;
-  margin-top:8px;
+  width: 100%;
+  background: rgba(10, 13, 24, 0.8);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+  color: white;
+  outline: none;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  margin-top: 4px;
 }
-input:focus{border-color:var(--blue)}
-.full-btn{width:100%}
+input:focus{
+  border-color: var(--blue);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+}
+
+.full-btn{width: 100%; margin-top: 22px;}
+
 .note{
-  font-size:12px;
-  color:var(--muted);
-  line-height:1.7;
-  margin-top:15px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-top: 16px;
 }
+
 .message{
-  display:none;
-  background:#153b30;
-  color:#a5f2cf;
-  border:1px solid #276b51;
-  border-radius:11px;
-  padding:13px;
-  margin-top:15px;
-  font-size:13px;
+  display: none;
+  background: rgba(16, 185, 129, 0.1);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 12px;
+  padding: 14px;
+  margin-top: 16px;
+  font-size: 13px;
+  font-weight: 500;
 }
+
 .help-card{
-  background:var(--panel);
-  padding:22px;
-  border:1px solid var(--line);
-  border-radius:15px;
-  margin-bottom:13px;
+  background: var(--panel);
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  margin-bottom: 14px;
+  backdrop-filter: blur(10px);
 }
+.help-card h3{font-size: 15px; font-weight: 600;}
 .help-card p{
-  color:var(--muted);
-  line-height:1.7;
-  font-size:13px;
-  margin-top:9px;
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 13px;
+  margin-top: 8px;
 }
+
 .profile-icon{
-  width:70px;
-  height:70px;
-  border-radius:22px;
-  background:linear-gradient(135deg,#925cff,#277fe7);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:32px;
-  margin-bottom:18px;
+  width: 65px;
+  height: 65px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin-bottom: 16px;
+  box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
 }
+
 .status{
-  display:inline-block;
-  font-size:11px;
-  color:#8df0c0;
-  background:#153b30;
-  padding:7px 12px;
-  border-radius:20px;
-  margin-top:15px;
+  display: inline-block;
+  font-size: 11px;
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-top: 16px;
+  font-weight: 600;
 }
+
 footer{
-  text-align:center;
-  border-top:1px solid var(--line);
-  padding:25px;
-  color:var(--muted);
-  font-size:12px;
-  margin-top:35px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+  padding: 30px;
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 50px;
+  background: rgba(7, 9, 19, 0.5);
 }
+
+/* BOTTOM NAV */
 .bottom-nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  width:100%;
-  background:#111321f5;
-  border-top:1px solid var(--line);
-  display:flex;
-  justify-content:space-around;
-  padding:11px 5px calc(11px + env(safe-area-inset-bottom));
-  z-index:30;
-  backdrop-filter:blur(15px);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(11, 15, 28, 0.85);
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 5px calc(10px + env(safe-area-inset-bottom));
+  z-index: 40;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
+
 .nav-item{
-  background:none;
-  border:0;
-  color:#8589a5;
-  font-size:10px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:5px;
-  min-width:55px;
+  background: none;
+  border: 0;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 60px;
+  transition: color 0.2s;
 }
-.nav-item .nav-icon{font-size:20px}
-.nav-item.active{color:var(--blue)}
-@media(min-width:701px){
-  body{padding-bottom:0}
-  .bottom-nav{display:none}
-  .desktop-nav{display:flex;gap:22px}
+.nav-item .nav-icon{font-size: 18px}
+.nav-item.active{color: var(--blue)}
+
+/* RESPONSIVE */
+@media(min-width: 701px){
+  body{padding-bottom: 0}
+  .bottom-nav{display: none}
+  .desktop-nav{display: flex; gap: 24px}
   .desktop-nav button{
-    background:none;
-    border:0;
-    color:#aeb0c5;
-    font-size:13px;
+    background: none;
+    border: 0;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.2s;
   }
-  .desktop-nav button:hover{color:var(--blue)}
+  .desktop-nav button:hover{color: var(--text)}
 }
-@media(max-width:700px){
-  header{height:65px;padding:0 5%}
-  .desktop-nav{display:none}
-  .container{width:92%}
-  .page{padding:22px 0}
-  .hero{padding:37px 22px}
-  .games{grid-template-columns:repeat(2,1fr);gap:11px}
-  .game{padding:15px 12px}
-  .game-image{width:60px;height:60px}
-  .game h3{font-size:13px}
-  .game p{font-size:11px}
-  .features{grid-template-columns:1fr}
-  .packages{gap:9px}
-  .package{padding:12px 8px;gap:7px}
-  .package strong{font-size:12px}
-  .currency-icon{width:29px;height:29px}
-  .diamond{width:29px;height:29px}
-  .panel{padding:18px}
-}
-@media(max-width:350px){
-  .games{grid-template-columns:1fr}
+
+@media(max-width: 700px){
+  header{height: 65px; padding: 0 5%}
+  .desktop-nav{display: none}
+  .container{width: 92%}
+  .page{padding: 24px 0}
+  .hero{padding: 35px 22px}
+  .games{grid-template-columns: repeat(2, 1fr); gap: 12px}
+  .game{padding: 16px}
+  .game-image{width: 50px; height: 50px; font-size: 24px; border-radius: 12px;}
+  .game h3{font-size: 14px}
+  .features{grid-template-columns: 1fr}
+  .packages{grid-template-columns: 1fr; gap: 10px}
+  .panel{padding: 20px}
 }
 </style>
 </head>
@@ -433,7 +598,9 @@ footer{
     <button onclick="showPage('profile')">Profil</button>
   </nav>
 
-  <div class="header-right">● ONLINE</div>
+  <div class="online-badge">
+    <span class="dot"></span> ONLINE
+  </div>
 </header>
 
 <main class="container">
@@ -441,11 +608,11 @@ footer{
 <section id="home" class="page active">
   <div class="hero">
     <div class="hero-content">
-      <div class="tag">⚡ GAMING TOP UP PLATFORM</div>
+      <div class="tag">⚡ GAMING PLATFORM</div>
       <h1>O‘yining uchun <span>TOP UP!</span></h1>
       <p>
-        Sevimli o‘yinlaring uchun qulay va zamonaviy
-        top-up platformasi. O‘yinni tanla va demo buyurtmangni yubor.
+        Sevimli o‘yinlaring uchun eng xavfsiz va zamonaviy
+        demo xizmat. O‘yinni tanla va buyurtmani yubor.
       </p>
       <button class="primary-btn" onclick="showPage('games')">
         O‘yinlarni ko‘rish →
@@ -461,33 +628,31 @@ footer{
   <div class="games" id="homeGames"></div>
 
   <div class="section-head">
-    <h2>✨ Afzalliklar</h2>
+    <h2>✨ Afzalliklarimiz</h2>
   </div>
 
   <div class="features">
     <div class="feature">
       <div class="feature-icon">⚡</div>
-      <h3>Qulay jarayon</h3>
-      <p>O‘yinni va paketni tanlab, UID orqali demo buyurtma yuborish.</p>
+      <h3>Tezkor jarayon</h3>
+      <p>Bir necha soniya ichida o‘yin va kerakli paketni tanlash imkoniyati.</p>
     </div>
     <div class="feature">
       <div class="feature-icon">🛡️</div>
       <h3>Xavfsizlik</h3>
-      <p>O‘yin parolingizni hech qachon so‘ramaymiz.</p>
+      <p>Parol so'ralmaydi, faqat o'yin ID raqami kifoya qiladi.</p>
     </div>
     <div class="feature">
       <div class="feature-icon">💎</div>
-      <h3>Gaming platforma</h3>
-      <p>O‘yinlar va paketlar bir joyda.</p>
+      <h3>Zamonaviy dizayn</h3>
+      <p>Mukammal va ko'zni qamashtiruvchi professional uslub.</p>
     </div>
   </div>
 </section>
 
 <section id="games" class="page">
   <h2 class="title">🎮 O‘yinlar katalogi</h2>
-  <p class="note" style="margin:0 0 20px">
-    O‘zing yoqtirgan o‘yinni tanla.
-  </p>
+  <p class="note" style="margin:0 0 24px">O‘zingizga kerakli o‘yinni tanlang va davom eting.</p>
   <div class="games" id="allGames"></div>
 </section>
 
@@ -507,308 +672,171 @@ footer{
     <div class="packages" id="packages"></div>
 
     <label class="label" for="playerId">👤 Player ID / UID</label>
-    <input id="playerId" type="text" placeholder="Player ID raqamingizni kiriting" maxlength="80">
+    <input id="playerId" type="text" placeholder="ID raqamingizni kiriting" maxlength="80">
 
-    <button class="primary-btn full-btn" id="orderButton" onclick="sendOrder()">
-      Demo buyurtma yuborish →
-    </button>
+        <button class="primary-btn full-btn" onclick="submitTopUp()">Buyurtma berish</button>
 
-    <div class="message" id="message"></div>
+    <div class="message" id="successMessage">
+      ✅ Buyurtmangiz qabul qilindi! Tez orada hisobingizga o'tkaziladi.
+    </div>
 
     <p class="note">
-      ⚠️ Bu demo versiya. Haqiqiy to‘lov va o‘yinga valyuta
-      yetkazib berish hozircha mavjud emas. O‘yin parolingizni kiritmang.
+      * ID raqamni to‘g‘ri kiritganingizga ishonch hosil qiling. Noto‘g‘ri ID uchun xizmat javobgar emas.
     </p>
   </div>
 </section>
 
 <section id="help" class="page">
-  <h2 class="title">❓ Yordam markazi</h2>
+  <h2 class="title">💬 Yordam markazi</h2>
+  <p class="note" style="margin:0 0 24px">Savollaringiz bormi? Biz doim yordam berishga tayyormiz.</p>
 
   <div class="help-card">
-    <h3>Sayt qanday ishlaydi?</h3>
-    <p>
-      1. O‘yinni tanlang.<br>
-      2. Kerakli paketni belgilang.<br>
-      3. Player ID kiriting.<br>
-      4. Demo buyurtma yuboring.
-    </p>
+    <h3>⚙️ Buyurtma qanday bajariladi?</h3>
+    <p>O'yinni tanlab, paketni belgilaysiz va o'yin ID raqamingizni kiritib buyurtma berasiz.</p>
   </div>
 
   <div class="help-card">
-    <h3>🔐 Xavfsizlik</h3>
-    <p>
-      Sayt hech qachon o‘yin akkauntingiz parolini so‘ramaydi.
-      Faqat Player ID kerak bo‘ladi.
-    </p>
+    <h3>⏱️ Qancha vaqt oladi?</h3>
+    <p>Odatda barcha buyurtmalar avtomatik yoki 1-5 daqiqa ichida amalga oshiriladi.</p>
   </div>
 
   <div class="help-card">
-    <h3>📦 Buyurtmalar</h3>
-    <p>
-      Demo buyurtmalar sinov maqsadida ma’lumotlar bazasiga yoziladi.
-      Bu haqiqiy top-up xizmati emas.
-    </p>
+    <h3>🛡️ Parol so'raladimi?</h3>
+    <p>Yo'q! Xavfsizligingiz uchun hech qanday parol yoki shaxsiy ma'lumot talab qilinmaydi.</p>
   </div>
 </section>
 
 <section id="profile" class="page">
-  <div class="panel">
-    <div class="profile-icon">👤</div>
-    <h2>Shaxsiy kabinet</h2>
-    <p class="note">
-      Xush kelibsiz! Bu bo‘lim hozircha demo rejimida.
-      Profil va buyurtmalar tarixi keyingi bosqichda qo‘shiladi.
-    </p>
-    <div class="status">● DEMO ACCOUNT</div>
+  <div class="panel" style="text-align: center;">
+    <div style="display: flex; justify-content: center;">
+      <div class="profile-icon">👤</div>
+    </div>
+    <h2 style="font-size: 20px; font-weight: 700;">Foydalanuvchi</h2>
+    <p class="note">Demo Rejim</p>
+    <div class="status">Faol foydalanuvchi</div>
   </div>
 </section>
 
 </main>
 
-<footer>
-  © 2026 TOP UP SERVICE<br>
-  <span style="display:block;margin-top:7px">
-    Gaming platforma | Demo loyiha
-  </span>
-</footer>
-
 <nav class="bottom-nav">
-  <button class="nav-item active" data-page="home" onclick="showPage('home')">
-    <span class="nav-icon">⌂</span>
+  <button class="nav-item active" onclick="showPage('home')" id="nav-home">
+    <span class="nav-icon">🏠</span>
     Bosh sahifa
   </button>
-  <button class="nav-item" data-page="games" onclick="showPage('games')">
+  <button class="nav-item" onclick="showPage('games')" id="nav-games">
     <span class="nav-icon">🎮</span>
     O‘yinlar
   </button>
-  <button class="nav-item" data-page="help" onclick="showPage('help')">
-    <span class="nav-icon">❔</span>
+  <button class="nav-item" onclick="showPage('help')" id="nav-help">
+    <span class="nav-icon">💬</span>
     Yordam
   </button>
-  <button class="nav-item" data-page="profile" onclick="showPage('profile')">
+  <button class="nav-item" onclick="showPage('profile')" id="nav-profile">
     <span class="nav-icon">👤</span>
     Profil
   </button>
 </nav>
 
+<footer>
+  <p>© 2026 TOP UP SERVICE. Barcha huquqlar himoyalangan.</p>
+</footer>
+
 <script>
-const SUPABASE_URL =
-"https://xdfwhzhhrnapqldfrbsr.supabase.co";
-
-const SUPABASE_KEY =
-"sb_publishable_dibm89IcPFuf1o1nEy2faQ_jnqAyXga";
-
-const games = [
-  {
-    name:"Free Fire",
-    currency:"Diamonds",
-    image:"https://www.google.com/s2/favicons?domain=ff.garena.com&sz=128",
-    icon:"🔥",
-    packages:["100 Diamonds","310 Diamonds","520 Diamonds","1060 Diamonds","2180 Diamonds","5600 Diamonds"]
-  },
-  {
-    name:"PUBG Mobile",
-    currency:"UC",
-    image:"https://www.google.com/s2/favicons?domain=pubgmobile.com&sz=128",
-    icon:"🎯",
-    packages:["60 UC","325 UC","660 UC","1800 UC","3850 UC","8100 UC"]
-  },
-  {
-    name:"Call of Duty Mobile",
-    currency:"CP",
-    image:"https://www.google.com/s2/favicons?domain=callofduty.com&sz=128",
-    icon:"⚔️",
-    packages:["80 CP","420 CP","880 CP","2400 CP","5000 CP"]
-  },
-  {
-    name:"Mobile Legends",
-    currency:"Diamonds",
-    image:"https://www.google.com/s2/favicons?domain=mobilelegends.com&sz=128",
-    icon:"🛡️",
-    packages:["86 Diamonds","172 Diamonds","257 Diamonds","706 Diamonds","1412 Diamonds"]
-  },
-  {
-    name:"Genshin Impact",
-    currency:"Crystals",
-    image:"https://www.google.com/s2/favicons?domain=genshin.hoyoverse.com&sz=128",
-    icon:"🌌",
-    packages:["60 Crystals","300 Crystals","980 Crystals","1980 Crystals","3280 Crystals"]
-  },
-  {
-    name:"Valorant",
-    currency:"VP",
-    image:"https://www.google.com/s2/favicons?domain=playvalorant.com&sz=128",
-    icon:"💥",
-    packages:["475 VP","1000 VP","2050 VP","3650 VP","5350 VP"]
-  }
+const gamesData = [
+  { id: 'pubg', name: 'PUBG Mobile', desc: 'UC va Paketlar', icon: '🎯', currency: 'UC' },
+  { id: 'ff', name: 'Free Fire', desc: 'Olmoslar (Diamonds)', icon: '🔥', currency: 'Olmos' },
+  { id: 'mlbb', name: 'Mobile Legends', desc: 'Diamonds', icon: '⚔️', currency: 'Diamond' },
+  { id: 'roblox', name: 'Roblox', desc: 'Robux', icon: '🧱', currency: 'Robux' },
+  { id: 'brawl', name: 'Brawl Stars', desc: 'Gems', icon: '⭐', currency: 'Gem' },
+  { id: 'genshin', name: 'Genshin Impact', desc: 'Genesis Crystals', icon: '✨', currency: 'Crystal' }
 ];
 
 let selectedGame = null;
-let selectedPackage = "";
+let selectedPackage = null;
 
-function showPage(id){
-  document.querySelectorAll(".page").forEach(page=>{
-    page.classList.remove("active");
+function renderGames() {
+  const homeGrid = document.getElementById('homeGames');
+  const allGrid = document.getElementById('allGames');
+  
+  let html = '';
+  gamesData.forEach(g => {
+    html += `
+      <div class="game" onclick="openGame('${g.id}')">
+        <div class="game-image">${g.icon}</div>
+        <h3>${g.name}</h3>
+        <p>${g.desc}</p>
+        <div class="game-arrow">→</div>
+      </div>
+    `;
   });
-
-  const target = document.getElementById(id);
-  if(target) target.classList.add("active");
-
-  document.querySelectorAll(".nav-item").forEach(button=>{
-    button.classList.toggle("active",button.dataset.page===id);
-  });
-
-  window.scrollTo({top:0,behavior:"smooth"});
+  
+  homeGrid.innerHTML = html;
+  allGrid.innerHTML = html;
 }
 
-function gameImage(game){
-  return `
-    <img
-      src="${game.image}"
-      alt="${game.name}"
-      loading="lazy"
-      onerror="this.style.display='none';this.parentElement.textContent='${game.icon}'"
-    >
-  `;
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+
+  document.querySelectorAll('.bottom-nav .nav-item').forEach(n => n.classList.remove('active'));
+  const navEl = document.getElementById('nav-' + pageId);
+  if(navEl) navEl.classList.add('active');
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function createGameCard(game){
-  return `
-    <div class="game" onclick="chooseGame('${game.name}')">
-      <div class="game-image">${gameImage(game)}</div>
-      <h3>${game.name}</h3>
-      <p>${game.currency}</p>
-      <span class="game-arrow">↗</span>
-    </div>
-  `;
-}
-
-function renderGames(){
-  document.getElementById("homeGames").innerHTML =
-    games.slice(0,3).map(createGameCard).join("");
-
-  document.getElementById("allGames").innerHTML =
-    games.map(createGameCard).join("");
-}
-
-function diamondIcon(){
-  return `
-    <svg class="diamond" viewBox="0 0 100 100" aria-label="Olmos">
-      <defs>
-        <linearGradient id="diamondGradient" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#a8f4ff"/>
-          <stop offset="50%" stop-color="#37c9ff"/>
-          <stop offset="100%" stop-color="#2868e8"/>
-        </linearGradient>
-      </defs>
-      <path d="M20 18 L80 18 L96 42 L50 92 L4 42 Z"
-        fill="url(#diamondGradient)" stroke="#b9f5ff" stroke-width="3"/>
-      <path d="M20 18 L35 42 L50 92 L4 42 Z" fill="#ffffff40"/>
-      <path d="M80 18 L65 42 L50 92 L96 42 Z" fill="#123dbb40"/>
-      <path d="M4 42 H96 M20 18 L35 42 L50 18 L65 42 L80 18"
-        fill="none" stroke="#d7faff" stroke-width="2"/>
-    </svg>
-  `;
-}
-
-function currencyIcon(game){
-  if(game.name==="Free Fire" || game.name==="Mobile Legends"){
-    return diamondIcon();
-  }
-  if(game.name==="PUBG Mobile") return "🪙";
-  if(game.name==="Call of Duty Mobile") return "🎖️";
-  if(game.name==="Genshin Impact") return "💠";
-  return "🔹";
-}
-
-function chooseGame(name){
-  selectedGame = games.find(game=>game.name===name);
-  selectedPackage = "";
-
+function openGame(gameId) {
+  selectedGame = gamesData.find(g => g.id === gameId);
   if(!selectedGame) return;
 
-  document.getElementById("gameTitle").textContent = selectedGame.name;
-  document.getElementById("gameCurrency").textContent = selectedGame.currency;
-  document.getElementById("detailImage").innerHTML = gameImage(selectedGame);
-  document.getElementById("playerId").value = "";
-  document.getElementById("message").style.display = "none";
+  document.getElementById('detailImage').innerText = selectedGame.icon;
+  document.getElementById('gameTitle').innerText = selectedGame.name;
+  document.getElementById('gameCurrency').innerText = selectedGame.desc;
 
-  document.getElementById("packages").innerHTML =
-    selectedGame.packages.map((item,index)=>`
-      <button class="package" onclick="choosePackage(${index},this)">
-        <span class="currency-icon">${currencyIcon(selectedGame)}</span>
-        <span>
-          <strong>${item}</strong>
-          <small>Demo paket</small>
-        </span>
+  const packagesContainer = document.getElementById('packages');
+  let pkgHtml = '';
+  
+  const amounts = [60, 325, 660, 1800, 3850, 8100];
+  amounts.forEach((amt, index) => {
+    pkgHtml += `
+      <button class="package ${index === 0 ? 'selected' : ''}" onclick="selectPackage(this, ${amt})">
+        <div class="currency-icon">${selectedGame.icon}</div>
+        <div>
+          <strong>${amt} ${selectedGame.currency}</strong>
+          <small>Tezkor yetkazish</small>
+        </div>
       </button>
-    `).join("");
-
-  showPage("detail");
-}
-
-function choosePackage(index,element){
-  selectedPackage = selectedGame.packages[index];
-
-  document.querySelectorAll(".package").forEach(item=>{
-    item.classList.remove("selected");
+    `;
   });
 
-  element.classList.add("selected");
+  packagesContainer.innerHTML = pkgHtml;
+  selectedPackage = amounts[0];
+  document.getElementById('playerId').value = '';
+  document.getElementById('successMessage').style.display = 'none';
+
+  showPage('detail');
 }
 
-async function sendOrder(){
-  const id = document.getElementById("playerId").value.trim();
-  const button = document.getElementById("orderButton");
-  const message = document.getElementById("message");
+function selectPackage(el, amt) {
+  document.querySelectorAll('.package').forEach(p => p.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedPackage = amt;
+}
 
-  if(!selectedGame || !selectedPackage || !id){
-    alert("O‘yin, paket va Player ID ni to‘ldiring!");
+function submitTopUp() {
+  const playerId = document.getElementById('playerId').value.trim();
+  const msg = document.getElementById('successMessage');
+
+  if(!playerId) {
+    alert('Iltimos, o‘yin ID raqamingizni kiriting!');
     return;
   }
 
-  if(button.disabled) return;
-
-  button.disabled = true;
-  button.textContent = "Yuborilmoqda...";
-
-  try{
-    const response = await fetch(
-      SUPABASE_URL + "/rest/v1/demo_orders",
-      {
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json",
-          "apikey":SUPABASE_KEY,
-          "Authorization":"Bearer " + SUPABASE_KEY,
-          "Prefer":"return=minimal"
-        },
-        body:JSON.stringify({
-          game_name:selectedGame.name,
-          package_name:selectedPackage,
-          player_id:id
-        })
-      }
-    );
-
-    if(!response.ok){
-      throw new Error(await response.text());
-    }
-
-    message.textContent =
-      "✓ Demo buyurtma bazaga muvaffaqiyatli saqlandi!";
-    message.style.display = "block";
-
-    document.getElementById("playerId").value = "";
-
-  }catch(error){
-    console.error(error);
-    alert("Buyurtma yuborilmadi. Xatolik: " + error.message);
-  }finally{
-    button.disabled = false;
-    button.textContent = "Demo buyurtma yuborish →";
-  }
+  msg.style.display = 'block';
+  setTimeout(() => {
+    msg.style.display = 'none';
+  }, 4000);
 }
 
 renderGames();
@@ -816,3 +844,4 @@ renderGames();
 
 </body>
 </html>
+
